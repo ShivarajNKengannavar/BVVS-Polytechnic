@@ -1,0 +1,7 @@
+services:
+  - type: web
+    name: frontend
+    env: static
+    staticPublishPath: dist/bvvs-frontend
+    buildCommand: npm install && npm run build
+    startCommand: null
