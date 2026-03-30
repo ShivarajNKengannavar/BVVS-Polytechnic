@@ -1,0 +1,62 @@
+<div class="sub-hero">
+  <div class="sub-hero-inner">
+    <a routerLink="/" class="back-btn">← Back to Home</a>
+    <div class="s-tag">📸 Campus Life</div>
+    <h1 class="sub-page-title">Gallery</h1>
+    <p class="sub-page-desc">Moments from 65+ years of academic excellence — sports days, technical fests, NSS camps, cultural programmes and everyday campus life at BVVS Polytechnic Bagalkot.</p>
+  </div>
+</div>
+
+<div class="sub-content">
+
+  <!-- Category filter -->
+  <div class="gallery-filter-bar">
+    <button class="gfb-btn" [class.active]="activeCategory==='all'"      (click)="setCategory('all')">All</button>
+    <button class="gfb-btn" [class.active]="activeCategory==='technical'" (click)="setCategory('technical')">Technical</button>
+    <button class="gfb-btn" [class.active]="activeCategory==='sports'"    (click)="setCategory('sports')">Sports</button>
+    <button class="gfb-btn" [class.active]="activeCategory==='cultural'"  (click)="setCategory('cultural')">Cultural</button>
+    <button class="gfb-btn" [class.active]="activeCategory==='nss'"       (click)="setCategory('nss')">NSS / NCC</button>
+    <button class="gfb-btn" [class.active]="activeCategory==='campus'"    (click)="setCategory('campus')">Campus</button>
+  </div>
+
+  <!-- Gallery grid -->
+  <div class="gallery-masonry">
+    <div class="gallery-card" *ngFor="let item of filteredItems" (click)="openItem(item)" [class.tall]="item.tall">
+      <div class="gallery-card-inner">
+        <div class="gallery-placeholder" [style.background]="item.bg">
+          <span class="gallery-emoji">{{ item.icon }}</span>
+        </div>
+        <div class="gallery-card-overlay">
+          <div class="gallery-card-category">{{ item.category }}</div>
+          <h4>{{ item.title }}</h4>
+          <p>{{ item.year }}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Lightbox -->
+  <div class="gallery-lightbox" [class.open]="lightboxItem" *ngIf="lightboxItem" (click)="closeItem()">
+    <div class="glb-inner" (click)="$event.stopPropagation()">
+      <button class="glb-close" (click)="closeItem()">✕</button>
+      <div class="glb-placeholder" [style.background]="lightboxItem.bg">
+        <span class="glb-emoji">{{ lightboxItem.icon }}</span>
+      </div>
+      <div class="glb-info">
+        <div class="glb-category">{{ lightboxItem.category }}</div>
+        <h3>{{ lightboxItem.title }}</h3>
+        <p>{{ lightboxItem.desc }}</p>
+        <span class="glb-year">{{ lightboxItem.year }}</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Stats -->
+  <div class="gallery-bottom-strip">
+    <div class="gbs-item" *ngFor="let s of galleryStats">
+      <div class="gbs-num">{{ s.num }}</div>
+      <div class="gbs-label">{{ s.label }}</div>
+    </div>
+  </div>
+
+</div>

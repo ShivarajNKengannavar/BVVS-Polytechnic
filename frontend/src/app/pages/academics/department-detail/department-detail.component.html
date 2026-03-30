@@ -1,0 +1,98 @@
+    <div class="sub-hero" *ngIf="dept">
+      <div class="sub-hero-inner">
+        <a routerLink="/academics" class="back-btn">← Back to Academics</a>
+        <div class="s-tag">{{ dept.shortName }} · Diploma · {{ dept.duration }}</div>
+        <h1 class="sub-page-title">{{ dept.icon }} {{ dept.name }}</h1>
+        <p class="sub-page-desc">{{ dept.description }}</p>
+      </div>
+    </div>
+
+    <div class="sub-content" *ngIf="dept">
+
+      <!-- Hero image -->
+      <div class="dept-hero-img-wrap">
+        <img [src]="dept.image" [alt]="dept.name" onerror="this.onerror=null;this.src='/assets/images/ENTRANCE.png';">
+        <div class="dept-hero-overlay"></div>
+        <div class="dept-duration-badge">{{ dept.duration }}</div>
+      </div>
+
+      <!-- About the department -->
+      <div class="sub-section" style="margin-top:40px">
+        <div class="sub-sec-head"><h2 class="sub-sec-title">About the Department</h2></div>
+        <div class="dept-about-grid">
+          <div class="dept-desc-block">
+            <p class="dept-full-desc">{{ dept.fullDescription }}</p>
+          </div>
+          <div class="dept-quick-info">
+            <div class="dqi-card">
+              <span class="dqi-icon">⏱</span>
+              <div><strong>Duration</strong><span>{{ dept.duration }}</span></div>
+            </div>
+            <div class="dqi-card">
+              <span class="dqi-icon">📚</span>
+              <div><strong>Semesters</strong><span>6 Semesters</span></div>
+            </div>
+            <div class="dqi-card">
+              <span class="dqi-icon">🎓</span>
+              <div><strong>Degree</strong><span>Diploma in Engineering</span></div>
+            </div>
+            <div class="dqi-card">
+              <span class="dqi-icon">🏫</span>
+              <div><strong>Mode</strong><span>Full-Time</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Subjects -->
+      <div class="sub-section">
+        <div class="sub-sec-head"><h2 class="sub-sec-title">Key Subjects</h2></div>
+        <div class="subjects-grid">
+          <div class="subject-pill" *ngFor="let sub of dept.subjects; let i = index">
+            <span class="sub-num">{{ i + 1 }}</span>
+            {{ sub }}
+          </div>
+        </div>
+      </div>
+
+      <!-- Downloads -->
+      <div class="sub-section">
+        <div class="sub-sec-head"><h2 class="sub-sec-title">Downloads &amp; Resources</h2></div>
+        <div class="sub-grid g2">
+          <a *ngIf="dept.faculty" [href]="dept.faculty.url" target="_blank" class="download-card">
+            <span class="dl-icon">📋</span>
+            <div>
+              <h4>Faculty Details</h4>
+              <p>Full list of faculty members, qualifications and designations.</p>
+            </div>
+            <span class="dl-arrow">↗</span>
+          </a>
+          <a *ngFor="let s of dept.syllabus" [href]="s.url" target="_blank" class="download-card">
+            <span class="dl-icon">📥</span>
+            <div>
+              <h4>{{ s.label }}</h4>
+              <p>Complete curriculum with subject-wise syllabus and scheme of teaching.</p>
+            </div>
+            <span class="dl-arrow">↗</span>
+          </a>
+          <a href="https://bvvspolytech.com/Admission.aspx" target="_blank" class="download-card highlight-card-dl">
+            <span class="dl-icon">✨</span>
+            <div>
+              <h4>Apply for Admission</h4>
+              <p>Admissions open for 2025–26. Check eligibility and apply online.</p>
+            </div>
+            <span class="dl-arrow">↗</span>
+          </a>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Loading state -->
+    <div class="sub-hero loading-hero" *ngIf="!dept">
+      <div class="sub-hero-inner">
+        <div class="skeleton-line w40"></div>
+        <div class="skeleton-line w60" style="margin-top:16px;height:48px"></div>
+        <div class="skeleton-line w80" style="margin-top:12px"></div>
+      </div>
+    </div>

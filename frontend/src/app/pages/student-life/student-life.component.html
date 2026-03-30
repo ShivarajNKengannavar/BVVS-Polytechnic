@@ -1,0 +1,144 @@
+<div class="sub-hero">
+  <div class="sub-hero-inner">
+    <a routerLink="/" class="back-btn">← Back to Home</a>
+    <div class="s-tag">🎓 Student Experience</div>
+    <h1 class="sub-page-title">Student Life &amp; Resources</h1>
+    <p class="sub-page-desc">Everything that makes BVVS Polytechnic more than just a college — committees, scholarships, sports, cultural activities, alumni and student welfare programmes.</p>
+  </div>
+</div>
+
+<div class="sub-content">
+
+  <!-- Tabs -->
+  <div class="sl-tabs" role="tablist">
+    <button class="sl-tab" 
+      [class.active]="activeTab==='committees'" 
+      (click)="selectTab('committees')"
+      role="tab"
+      [attr.aria-selected]="activeTab==='committees'"
+      aria-controls="committees-panel">
+      🤝 Committees
+    </button>
+    <button class="sl-tab" 
+      [class.active]="activeTab==='scholarships'" 
+      (click)="selectTab('scholarships')"
+      role="tab"
+      [attr.aria-selected]="activeTab==='scholarships'"
+      aria-controls="scholarships-panel">
+      🎓 Scholarships
+    </button>
+    <button class="sl-tab" 
+      [class.active]="activeTab==='sports'" 
+      (click)="selectTab('sports')"
+      role="tab"
+      [attr.aria-selected]="activeTab==='sports'"
+      aria-controls="sports-panel">
+      🏆 Sports
+    </button>
+    <button class="sl-tab" 
+      [class.active]="activeTab==='clubs'" 
+      (click)="selectTab('clubs')"
+      role="tab"
+      [attr.aria-selected]="activeTab==='clubs'"
+      aria-controls="clubs-panel">
+      🔬 Clubs
+    </button>
+    <button class="sl-tab" 
+      [class.active]="activeTab==='alumni'" 
+      (click)="selectTab('alumni')"
+      role="tab"
+      [attr.aria-selected]="activeTab==='alumni'"
+      aria-controls="alumni-panel">
+      🔗 Alumni
+    </button>
+  </div>
+
+  <!-- COMMITTEES tab -->
+  <div *ngIf="activeTab==='committees'" class="sub-section" id="committees-panel" role="tabpanel">
+    <div *ngIf="loadingCommittees" class="sl-loading">
+      <div class="sl-spinner"></div>
+      <p>Loading committees...</p>
+    </div>
+    <div *ngIf="errorCommittees && !loadingCommittees" class="sl-error" role="alert">
+      ⚠️ {{ errorCommittees }}
+    </div>
+    <div class="sub-grid" *ngIf="!loadingCommittees">
+      <div class="info-card" *ngFor="let c of committees">
+        <span class="info-icon">{{ c.icon }}</span>
+        <h4>{{ c.title }}</h4>
+        <p>{{ c.description }}</p>
+        <a *ngIf="c.doc_url || c.docUrl" [href]="c.doc_url || c.docUrl" target="_blank" class="info-link">{{ c.label || 'View Details' }} ↗</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- SCHOLARSHIPS tab -->
+  <div *ngIf="activeTab==='scholarships'" class="sub-section" id="scholarships-panel" role="tabpanel">
+    <div *ngIf="loadingScholarships" class="sl-loading">
+      <div class="sl-spinner"></div>
+      <p>Loading scholarships...</p>
+    </div>
+    <div *ngIf="errorScholarships && !loadingScholarships" class="sl-error" role="alert">
+      ⚠️ {{ errorScholarships }}
+    </div>
+    <div class="sl-schol-info" *ngIf="!loadingScholarships">
+      <h3>Financial Aid &amp; Scholarships</h3>
+      <p>BVVS Polytechnic facilitates multiple government and AICTE scholarship programmes for eligible students. Applications are processed every academic year through the respective scholarship portals.</p>
+    </div>
+    <div class="sub-grid" *ngIf="!loadingScholarships">
+      <div class="info-card" *ngFor="let s of scholarships">
+        <span class="info-icon">{{ s.icon }}</span>
+        <h4>{{ s.title }}</h4>
+        <p>{{ s.description }}</p>
+        <a *ngIf="s.doc_url || s.docUrl" [href]="s.doc_url || s.docUrl" target="_blank" class="info-link">{{ s.label || 'View Details' }} ↗</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- SPORTS tab -->
+  <div *ngIf="activeTab==='sports'" class="sub-section" id="sports-panel" role="tabpanel">
+    <div class="sl-sports-intro">
+      <p>BVVS Polytechnic has a strong tradition of sports excellence, hosting State Level Sports Meets and producing outstanding student-athletes across Karnataka. The college participates in inter-collegiate tournaments and the Silver Jubilee Sports Meet.</p>
+    </div>
+    <div class="sub-grid g2">
+      <div class="info-card" *ngFor="let s of sportsItems">
+        <span class="info-icon">{{ s.icon }}</span>
+        <h4>{{ s.title }}</h4>
+        <p>{{ s.desc }}</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- CLUBS tab -->
+  <div *ngIf="activeTab==='clubs'" class="sub-section" id="clubs-panel" role="tabpanel">
+    <div class="sub-grid">
+      <div class="info-card" *ngFor="let c of clubs">
+        <span class="info-icon">{{ c.icon }}</span>
+        <h4>{{ c.title }}</h4>
+        <p>{{ c.desc }}</p>
+        <a *ngIf="c.url" [href]="c.url" target="_blank" class="info-link">Learn More ↗</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- ALUMNI tab -->
+  <div *ngIf="activeTab==='alumni'" class="sub-section" id="alumni-panel" role="tabpanel">
+    <div class="sl-alumni-block">
+      <div class="sl-alumni-text">
+        <h3>BVVS Alumni Network</h3>
+        <p>The BVVS Polytechnic alumni network spans industry leaders, entrepreneurs and professionals across India and abroad. The Alumni Executive Committee organises annual meets, mentorship programmes and industry interaction events.</p>
+        <div class="sl-alumni-actions">
+          <a href="https://bvvspolytech.com/alumnireg.htm" target="_blank" class="btn-glow" style="font-size:0.85rem;padding:11px 22px">Register as Alumni ↗</a>
+          <button (click)="selectTab('committees')" class="btn-ghost" style="font-size:0.85rem;padding:11px 22px">Alumni EC Details ↗</button>
+        </div>
+      </div>
+      <div class="sl-alumni-stats">
+        <div class="sl-alum-stat" *ngFor="let a of alumniStats">
+          <div class="sl-alum-num">{{ a.num }}</div>
+          <div class="sl-alum-label">{{ a.label }}</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>

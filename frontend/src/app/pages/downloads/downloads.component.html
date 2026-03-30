@@ -1,0 +1,59 @@
+    <div class="sub-hero">
+      <div class="sub-hero-inner">
+        <a routerLink="/" class="back-btn">← Back to Home</a>
+        <div class="s-tag">Official Documents</div>
+        <h1 class="sub-page-title">Downloads</h1>
+        <p class="sub-page-desc">All official documents — pay scales, audit reports, budget documents, salary statements, C&amp;R rules and DTE documents.</p>
+      </div>
+    </div>
+    <div class="sub-content">
+
+      <!-- Pay Scale Documents -->
+      <div class="sub-section">
+        <div class="sub-sec-head"><h2 class="sub-sec-title">Pay Scale Documents</h2></div>
+        <div class="sub-grid g4">
+          <a *ngFor="let d of payScaleDocs" [href]="d.url" target="_blank" class="download-card">
+            <span class="dl-icon">📄</span>
+            <div><h4>{{ d.title }}</h4><p>{{ d.desc }}</p></div>
+            <span class="dl-arrow">↗</span>
+          </a>
+        </div>
+      </div>
+
+      <!-- Audit Reports -->
+      <div class="sub-section">
+        <div class="sub-sec-head"><h2 class="sub-sec-title">Audit Reports</h2></div>
+        <div class="sub-grid g4">
+          <a *ngFor="let d of auditDocs" [href]="d.url" target="_blank" class="download-card">
+            <span class="dl-icon">📊</span>
+            <div><h4>{{ d.title }}</h4></div>
+            <span class="dl-arrow">↗</span>
+          </a>
+        </div>
+      </div>
+
+      <!-- Budget Documents -->
+      <div class="sub-section">
+        <div class="sub-sec-head"><h2 class="sub-sec-title">Budget Documents</h2></div>
+        <div class="sub-grid g4">
+          <a *ngFor="let d of budgetDocs" [href]="d.url" target="_blank" class="download-card">
+            <span class="dl-icon">💰</span>
+            <div><h4>{{ d.title }}</h4></div>
+            <span class="dl-arrow">↗</span>
+          </a>
+        </div>
+      </div>
+
+      <!-- Consolidated Salary Statements -->
+      <div class="sub-section">
+        <div class="sub-sec-head"><h2 class="sub-sec-title">Consolidated Salary Statements</h2></div>
+        <div class="sub-grid g4">
+          <a *ngFor="let d of salaryDocs" [href]="d.url" target="_blank" class="download-card">
+            <span class="dl-icon">💸</span>
+            <div><h4>{{ d.title }}</h4></div>
+            <span class="dl-arrow">↗</span>
+          </a>
+        </div>
+      </div>
+
+    </div>

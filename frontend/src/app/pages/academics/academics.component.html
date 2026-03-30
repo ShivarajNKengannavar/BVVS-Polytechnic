@@ -1,0 +1,77 @@
+    <div class="sub-hero">
+      <div class="sub-hero-inner">
+        <a routerLink="/" class="back-btn">← Back to Home</a>
+        <div class="s-tag">Academic Programmes</div>
+        <h1 class="sub-page-title">Departments &amp; Courses</h1>
+        <p class="sub-page-desc">9 industry-relevant diploma programmes. Each department includes faculty details, curriculum downloads and lab information.</p>
+      </div>
+    </div>
+
+    <div class="sub-content">
+
+      <!-- Admission banner -->
+      <div class="results-box" style="margin-bottom:48px">
+        <h3>Ready to Join?</h3>
+        <p>Applications open for 2025–26. Check eligibility, seat availability and apply online.</p>
+        <div class="results-btns">
+          <a href="https://bvvspolytech.com/Admission.aspx" target="_blank" class="rbtn">✨ Apply for Admission</a>
+        </div>
+      </div>
+
+      <!-- Diploma Programmes -->
+      <div class="sub-section">
+        <div class="sub-sec-head">
+          <h2 class="sub-sec-title">Diploma Programmes</h2>
+          <span class="sub-sec-meta">9 programmes · 3 years each</span>
+        </div>
+        <div class="sub-grid" *ngIf="departments.length">
+          <div class="sub-card" *ngFor="let dept of departments"
+               [routerLink]="['/academics', dept.id]">
+            <div class="sub-card-img">
+              <img [src]="dept.image" [alt]="dept.name" onerror="this.onerror=null;this.src='/assets/images/ENTRANCE.png';">
+              <div class="sub-card-ov"></div>
+              <div class="dept-icon-badge">{{ dept.icon }}</div>
+            </div>
+            <div class="sub-card-body">
+              <span class="tag-chip">{{ dept.shortName }}</span>
+              <h3>{{ dept.name }}</h3>
+              <p>{{ dept.description }}</p>
+              <div class="sub-card-links">
+                <a *ngIf="dept.faculty" [href]="dept.faculty.url" target="_blank"
+                   class="sub-pill" (click)="$event.stopPropagation()">📋 Faculty</a>
+                <a *ngFor="let s of dept.syllabus" [href]="s.url" target="_blank"
+                   class="sub-pill" (click)="$event.stopPropagation()">📥 {{ s.label }}</a>
+              </div>
+              <span class="dept-explore-link">View Department →</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Loading state -->
+        <div class="loading-grid" *ngIf="!departments.length">
+          <div class="skeleton-card" *ngFor="let i of [1,2,3,4,5,6]"></div>
+        </div>
+      </div>
+
+      <!-- Skill Development -->
+      <div class="sub-section">
+        <div class="sub-sec-head"><h2 class="sub-sec-title">Skill Development Programmes</h2></div>
+        <div class="skill-grid">
+          <div class="skill-card" *ngFor="let s of skillProgrammes">
+            <div class="skill-icon-wrap">
+              <img [src]="s.image" [alt]="s.title" onerror="this.onerror=null;this.src='/assets/images/ENTRANCE.png';">
+              <div class="skill-icon-overlay"></div>
+              <div class="skill-icon">{{ s.icon }}</div>
+            </div>
+            <div class="skill-body">
+              <h3>{{ s.title }}</h3>
+              <p>{{ s.description }}</p>
+              <div class="skill-tags">
+                <span *ngFor="let tag of s.tags">{{ tag }}</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>

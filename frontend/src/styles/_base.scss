@@ -1,0 +1,428 @@
+// ═══════════════════════════════════════════════════
+//  BVVS Polytechnic — Base Styles & Reset
+// ═══════════════════════════════════════════════════
+@use 'variables' as *;
+@use 'mixins' as *;
+
+// ── CSS Custom Properties (accessible in plain CSS too) ──
+:root {
+  --navy:        #{$navy};
+  --dark:        #{$dark};
+  --card:        #{$card};
+  --gold:        #{$gold};
+  --gold2:       #{$gold-2};
+  --gold-soft:   #{$gold-light};
+  --blue2:       #{$blue-2};
+  --white:       #{$white};
+  --muted:       #{$text-muted};
+  --border:      #{$border};
+  --bg-main:     #{$dark};
+  --bg-alt:      #{$card};
+  --surface:     #{$card};
+  --surface-soft:#{$card-hover};
+  --text-primary:#{$text-primary};
+  --text-secondary:#{$text-secondary};
+
+  --font-display: #{$font-display};
+  --font-ui:      #{$font-ui};
+  --font-mono:    #{$font-mono};
+  --nav-height:   #{$nav-height};
+}
+
+// ── Reset ────────────────────────────────────────
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+// ── Body ─────────────────────────────────────────
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: $font-ui;
+  background: $dark;
+  color: $text-primary;
+  overflow-x: hidden;
+  cursor: none;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+  padding-top: $nav-height;
+  @include custom-scrollbar;
+}
+
+// ── Typography ───────────────────────────────────
+h1, h2, h3, h4, h5, h6 {
+  font-family: $font-display;
+  line-height: 1.2;
+  color: $navy;
+}
+
+h1 { font-size: clamp(2.4rem, 5vw, 4.8rem); font-weight: 800; }
+h2 { font-size: clamp(1.6rem, 3vw, 2.4rem); font-weight: 700; }
+h3 { font-size: clamp(1.1rem, 2vw, 1.5rem); font-weight: 700; }
+h4 { font-size: 0.95rem; font-weight: 700; font-family: $font-ui; }
+
+p  { line-height: 1.8; color: $text-secondary; font-size: 0.92rem; }
+
+a  { text-decoration: none; color: inherit; transition: $transition-fast; }
+
+img { max-width: 100%; height: auto; display: block; }
+
+button, input, select, textarea {
+  font-family: $font-ui;
+  font-size: inherit;
+}
+
+// ── Custom cursor ────────────────────────────────
+#cursor {
+  width: 10px; height: 10px; border-radius: 50%;
+  background: $navy;
+  position: fixed; pointer-events: none; z-index: 9999;
+  transform: translate(-50%, -50%);
+  mix-blend-mode: difference;
+  transition: width 0.2s, height 0.2s;
+}
+
+#cursor-ring {
+  width: 36px; height: 36px; border-radius: 50%;
+  border: 1.5px solid rgba(63, 52, 42, 0.35);
+  position: fixed; pointer-events: none; z-index: 9998;
+  transform: translate(-50%, -50%);
+  transition: width 0.3s, height 0.3s;
+}
+
+#particles {
+  position: fixed; top: 0; left: 0;
+  width: 100%; height: 100%;
+  pointer-events: none; z-index: 0;
+}
+
+@media (max-width: #{$bp-md}) {
+  #cursor, #cursor-ring { display: none !important; }
+  body { cursor: auto; }
+}
+
+// ── Animations ───────────────────────────────────
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(24px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+@keyframes shimmer {
+  0%   { background-position: -200% 0; }
+  100% { background-position:  200% 0; }
+}
+
+@keyframes tick {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+
+@keyframes dropIn {
+  from { opacity: 0; transform: translateY(-8px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes blink {
+  50% { opacity: 0; }
+}
+
+@keyframes floatCard {
+  0%, 100% { transform: translateY(0px) rotate(-1deg);  opacity: 0.4; }
+  25%       { transform: translateY(-12px) rotate(1deg); opacity: 0.7; }
+  50%       { transform: translateY(-6px) rotate(-0.5deg); opacity: 0.55; }
+  75%       { transform: translateY(-18px) rotate(1.5deg); opacity: 0.65; }
+}
+
+// ── Scroll reveal ────────────────────────────────
+.reveal, .reveal-left, .reveal-right {
+  opacity: 0;
+  transition: opacity 0.65s ease, transform 0.65s ease;
+}
+
+.reveal        { transform: translateY(28px); }
+.reveal-left   { transform: translateX(-32px); }
+.reveal-right  { transform: translateX(32px); }
+
+.reveal.visible,
+.reveal-left.visible,
+.reveal-right.visible {
+  opacity: 1;
+  transform: translate(0);
+}
+
+// ── Ticker ───────────────────────────────────────
+.ticker {
+  background: linear-gradient(90deg, $gold, $gold-2);
+  color: $navy; padding: 7px 0; overflow: hidden;
+  position: relative; z-index: 100;
+
+  .ticker-inner {
+    display: flex; gap: 0;
+    animation: tick 35s linear infinite;
+    white-space: nowrap; width: max-content;
+  }
+
+  .ticker-item {
+    padding: 0 36px;
+    display: flex; align-items: center; gap: 10px;
+    font-family: $font-mono; font-size: 0.7rem;
+    font-weight: 700; letter-spacing: 0.04em;
+    color: $navy; text-decoration: none;
+
+    &::before {
+      content: '◆'; opacity: 0.5; font-size: 0.48rem;
+    }
+  }
+
+  .ticker-label {
+    position: absolute; left: 0; top: 0; bottom: 0;
+    padding: 0 14px; background: $navy;
+    color: $gold; font-size: $fs-xs; font-weight: 800;
+    letter-spacing: 0.1em; display: flex; align-items: center;
+    z-index: 2; white-space: nowrap; font-family: $font-mono;
+  }
+
+  &.has-label { padding-left: 68px; }
+}
+
+// ── Global layout ────────────────────────────────
+.wrap {
+  max-width: $max-width;
+  margin: 0 auto;
+  padding: 0 $space-6;
+
+  @include md { padding: 0 $space-5; }
+  @include sm { padding: 0 $space-4; }
+}
+
+// ── Sub-page layout ──────────────────────────────
+.sub-hero {
+  background: linear-gradient(180deg, $dark 0%, $card 100%);
+  padding: 80px 24px 60px;
+  text-align: center;
+  border-bottom: 1px solid $border;
+  position: relative;
+  overflow: hidden;
+
+  &::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: radial-gradient(ellipse at 50% 0%, rgba(201,181,156,0.18) 0%, transparent 65%);
+    pointer-events: none;
+  }
+}
+
+.sub-hero-inner {
+  max-width: 760px; margin: 0 auto; position: relative; z-index: 1;
+}
+
+.sub-page-title {
+  font-family: $font-display !important;
+  font-size: clamp(2rem, 4vw, 3rem) !important;
+  font-weight: 800; color: $navy;
+  margin: 12px 0 16px;
+}
+
+.sub-page-desc {
+  font-size: 1rem; color: $text-secondary; max-width: 580px;
+  margin: 0 auto; line-height: 1.85;
+}
+
+.sub-content {
+  max-width: $max-width; margin: 0 auto;
+  padding: 56px 24px;
+}
+
+.sub-section { margin-bottom: 56px; }
+
+.sub-sec-head {
+  @include flex-between;
+  margin-bottom: 24px; flex-wrap: wrap; gap: 8px;
+}
+
+.sub-sec-title {
+  font-family: $font-display !important;
+  font-size: 1.5rem !important; font-weight: 700; color: $navy;
+}
+
+.sub-sec-meta { font-size: $fs-xs; color: $text-muted; font-family: $font-mono; }
+
+// ── Grids ────────────────────────────────────────
+.sub-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+
+  &.g2 { grid-template-columns: repeat(2, 1fr); }
+  &.g4 { grid-template-columns: repeat(4, 1fr); }
+
+  @include xl { grid-template-columns: repeat(2, 1fr); }
+  @include md { grid-template-columns: 1fr; &.g4 { grid-template-columns: repeat(2, 1fr); } }
+}
+
+// ── Info card ────────────────────────────────────
+.info-card {
+  @include card;
+  padding: 22px 20px;
+  display: flex; flex-direction: column; gap: 8px;
+
+  .info-icon { font-size: 1.8rem; }
+  h4 { font-size: 0.93rem; font-weight: 700; color: $navy; margin-bottom: 2px; }
+  p  { font-size: 0.82rem; color: $text-secondary; line-height: 1.7; flex: 1; }
+}
+
+.info-link {
+  display: inline-flex; align-items: center; gap: 4px;
+  color: $blue-2; font-size: 0.77rem; font-weight: 700;
+  text-decoration: none; margin-top: 6px;
+  &:hover { color: $gold; }
+}
+
+// ── Back button ──────────────────────────────────
+.back-btn {
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 8px 18px; border-radius: $radius-full;
+  background: $card-hover; border: 1px solid $border;
+  color: $text-secondary; font-size: 0.8rem; font-weight: 600;
+  cursor: pointer; text-decoration: none; margin-bottom: 20px;
+  transition: $transition-fast;
+  &:hover { background: $gold-light; color: $navy; }
+}
+
+// ── S-tag (section label) ────────────────────────
+.s-tag {
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 5px 14px; border-radius: $radius-full;
+  background: $gold-light; border: 1px solid $border-gold;
+  color: $gold-2; font-size: $fs-xs; font-weight: 800;
+  letter-spacing: 0.1em; text-transform: uppercase;
+  font-family: $font-mono; margin-bottom: 10px;
+}
+
+// ── Buttons ──────────────────────────────────────
+.btn-glow {
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 14px 28px; border-radius: $radius-full;
+  @include gold-gradient;
+  color: $navy; font-weight: 800; font-size: 0.9rem;
+  border: none; cursor: pointer; text-decoration: none;
+  transition: $transition-base; letter-spacing: 0.02em;
+
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: $shadow-gold;
+  }
+}
+
+.btn-ghost {
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 14px 28px; border-radius: $radius-full;
+  background: $card-hover; border: 1px solid $border;
+  color: $navy; font-weight: 700; font-size: 0.9rem;
+  cursor: pointer; text-decoration: none;
+  transition: $transition-base;
+
+  &:hover { border-color: $gold; background: $gold-light; color: $navy; }
+}
+
+// ── Results box ──────────────────────────────────
+.results-box {
+  background: linear-gradient(135deg, rgba(212,168,67,0.1), rgba(212,168,67,0.03));
+  border: 1px solid $border-gold;
+  border-radius: $radius-xl; padding: 36px;
+  text-align: center; margin-bottom: 40px;
+
+  h3 { font-family: $font-display; font-size: 1.5rem; margin-bottom: 8px; }
+  p  { font-size: 0.9rem; color: $text-muted; margin-bottom: 20px; }
+}
+
+.results-btns {
+  display: flex; align-items: center; justify-content: center;
+  gap: 12px; flex-wrap: wrap;
+}
+
+.rbtn {
+  padding: 11px 22px; border-radius: $radius-full;
+  background: $dark; border: 1px solid $border-gold;
+  color: $gold-2; font-weight: 700; font-size: 0.82rem;
+  text-decoration: none; cursor: pointer;
+  transition: $transition-fast;
+  &:hover { background: $gold-light; color: $navy; }
+}
+
+// ── Download card ────────────────────────────────
+.download-card {
+  display: flex; align-items: center; gap: 16px;
+  padding: 20px 22px; border-radius: $radius-lg;
+  background: $card; border: 1px solid $border;
+  text-decoration: none; color: inherit;
+  transition: $transition-base;
+
+  &:hover {
+    border-color: $border-gold;
+    background: $gold-light;
+    transform: translateY(-3px);
+  }
+
+  &.highlight-card-dl { border-color: $border-gold; background: $gold-light; }
+
+  .dl-icon  { font-size: 2rem; flex-shrink: 0; }
+  .dl-arrow { margin-left: auto; color: $gold; font-size: 1rem; flex-shrink: 0; }
+  h4 { font-size: 0.92rem; font-weight: 700; margin-bottom: 3px; }
+  p  { font-size: 0.78rem; color: $text-muted; line-height: 1.5; margin: 0; }
+}
+
+// ── Video modal ──────────────────────────────────
+.video-modal {
+  display: none; position: fixed; inset: 0; z-index: $z-modal;
+
+  &.open { display: flex; align-items: center; justify-content: center; }
+}
+
+.video-modal-bg {
+  position: absolute; inset: 0;
+  background: rgba(0,0,0,0.88); backdrop-filter: blur(6px);
+}
+
+.video-modal-inner {
+  position: relative; width: 90%; max-width: 900px;
+  border-radius: $radius-xl; overflow: hidden;
+  box-shadow: $shadow-lg; z-index: 1;
+
+  video { width: 100%; display: block; }
+}
+
+.video-modal-close {
+  position: absolute; top: 14px; right: 14px;
+  width: 36px; height: 36px; border-radius: 50%;
+  background: rgba(0,0,0,0.6); border: none; color: $white;
+  font-size: 1rem; cursor: pointer; z-index: 2;
+  display: flex; align-items: center; justify-content: center;
+  transition: $transition-fast;
+  &:hover { background: rgba(220,60,60,0.7); }
+}
+
+// ── Skeleton loaders ─────────────────────────────
+.skeleton-line {
+  height: 16px; border-radius: $radius-sm;
+  @include skeleton;
+  &.w40 { width: 40%; }
+  &.w60 { width: 60%; }
+  &.w80 { width: 80%; }
+}
+
+.skeleton-card {
+  height: 280px; border-radius: $radius-lg;
+  @include skeleton;
+}
+
+// ── Glow divider ─────────────────────────────────
+.glow-div {
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(212,168,67,0.3), transparent);
+  margin: 0;
+}

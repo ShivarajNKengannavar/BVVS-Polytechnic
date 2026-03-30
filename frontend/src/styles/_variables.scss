@@ -1,0 +1,93 @@
+// ═══════════════════════════════════════════════════
+//  BVVS Polytechnic — Design Tokens / Variables
+// ═══════════════════════════════════════════════════
+
+// ── Color Palette (Light System) ─────────────────
+$navy:        #2a211b;
+$dark:        #f9f8f6;
+$card:        #efe9e3;
+$card-hover:  #f4efea;
+$gold:        #c9b59c;
+$gold-2:      #b8a188;
+$gold-light:  #d9cfc7;
+$blue-2:      #5a4c40;
+$green:       #16a34a;
+$red:         #dc2626;
+
+// ── Text Colors ──────────────────────────────────
+$white:       #f9f8f6;
+$text-primary:   #1f1712;
+$text-secondary: #2b221c;
+$text-muted:     #4a3e33;
+
+// ── Border Colors ────────────────────────────────
+$border:         #d9cfc7;
+$border-gold:    rgba(201, 181, 156, 0.5);
+$border-hover:   #c9b59c;
+
+// ── Typography ───────────────────────────────────
+$font-display: 'Playfair Display', 'Times New Roman', serif;
+$font-ui:      'Nunito Sans', 'Segoe UI', system-ui, sans-serif;
+$font-mono:    'DM Mono', 'Courier New', monospace;
+
+// ── Font Sizes ───────────────────────────────────
+$fs-xs:   0.68rem;
+$fs-sm:   0.78rem;
+$fs-base: 0.88rem;
+$fs-md:   1rem;
+$fs-lg:   1.15rem;
+$fs-xl:   1.4rem;
+$fs-2xl:  1.75rem;
+$fs-3xl:  2.2rem;
+
+// ── Spacing ──────────────────────────────────────
+$space-1:  4px;
+$space-2:  8px;
+$space-3:  12px;
+$space-4:  16px;
+$space-5:  20px;
+$space-6:  24px;
+$space-8:  32px;
+$space-10: 40px;
+$space-12: 48px;
+$space-16: 64px;
+
+// ── Border Radius ────────────────────────────────
+$radius-sm:  6px;
+$radius-md:  10px;
+$radius-lg:  16px;
+$radius-xl:  20px;
+$radius-2xl: 28px;
+$radius-full: 100px;
+
+// ── Shadows ──────────────────────────────────────
+$shadow-sm:  0 4px 16px rgba(63, 52, 42, 0.08);
+$shadow-md:  0 10px 30px rgba(63, 52, 42, 0.12);
+$shadow-lg:  0 20px 60px rgba(63, 52, 42, 0.16);
+$shadow-gold: 0 10px 26px rgba(201, 181, 156, 0.45);
+
+// ── Transitions ──────────────────────────────────
+$transition-fast:   all 0.15s ease;
+$transition-base:   all 0.25s ease;
+$transition-slow:   all 0.4s ease;
+
+// ── Z-Index ──────────────────────────────────────
+$z-base:     1;
+$z-dropdown: 100;
+$z-sticky:   200;
+$z-navbar:   1000;
+$z-drawer:   1100;
+$z-modal:    1200;
+$z-toast:    1300;
+
+// ── Breakpoints ──────────────────────────────────
+$bp-sm:  480px;
+$bp-md:  768px;
+$bp-lg:  900px;
+$bp-xl:  1100px;
+$bp-2xl: 1400px;
+
+// ── Layout ───────────────────────────────────────
+$nav-height:    64px;
+$sidebar-width: 240px;
+$max-width:     1400px;

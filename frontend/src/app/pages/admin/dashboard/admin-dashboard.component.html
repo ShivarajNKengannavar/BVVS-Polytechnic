@@ -1,0 +1,476 @@
+<div class="admin-shell">
+
+  <!-- ══ Sidebar ══════════════════════════════════════════ -->
+  <aside class="admin-sidebar">
+
+    <div class="admin-sidebar-logo">
+      <div class="admin-logo-hex">BV</div>
+      <div>
+        <div class="admin-logo-title">Admin Panel</div>
+        <div class="admin-logo-sub">BVVS Polytechnic</div>
+      </div>
+    </div>
+
+    <nav class="admin-nav">
+      <a class="admin-nav-item" [class.active]="activeTab==='dashboard'" (click)="setTab('dashboard')">
+        <span class="ani">📊</span> Dashboard
+      </a>
+      <a class="admin-nav-item" [class.active]="activeTab==='notices'" (click)="setTab('notices')">
+        <span class="ani">🔔</span> Notices
+      </a>
+      <a class="admin-nav-item" [class.active]="activeTab==='circulars'" (click)="setTab('circulars')">
+        <span class="ani">📢</span> Circulars
+      </a>
+      <a class="admin-nav-item" [class.active]="activeTab==='documents'" (click)="setTab('documents')">
+        <span class="ani">📁</span> Documents
+      </a>
+      <a class="admin-nav-item" [class.active]="activeTab==='departments'" (click)="setTab('departments')">
+        <span class="ani">🎓</span> Departments
+      </a>
+      <a class="admin-nav-item" [class.active]="activeTab==='settings'" (click)="setTab('settings')">
+        <span class="ani">⚙️</span> Settings
+      </a>
+    </nav>
+
+    <div class="admin-sidebar-footer">
+      <div class="admin-user-info">
+        <div class="admin-user-avatar">{{ adminUser.charAt(0).toUpperCase() }}</div>
+        <div>
+          <div class="admin-user-name">{{ adminUser }}</div>
+          <div class="admin-user-role">Administrator</div>
+        </div>
+      </div>
+      <a href="/" target="_blank" class="admin-view-site-btn">↗ View Site</a>
+      <button class="admin-logout-btn" (click)="logout()">Logout</button>
+    </div>
+
+  </aside>
+
+  <!-- ══ Main Content ══════════════════════════════════════ -->
+  <main class="admin-main">
+
+    <!-- ── DASHBOARD ─────────────────────────────────────── -->
+    <section *ngIf="activeTab==='dashboard'">
+      <div class="admin-page-header">
+        <div>
+          <h1>Dashboard</h1>
+          <p>Welcome back, <strong>{{ adminUser }}</strong>. Here's a quick overview.</p>
+        </div>
+      </div>
+
+      <div class="admin-stats-grid">
+        <div class="admin-stat-card" (click)="setTab('notices')">
+          <div class="admin-stat-icon">🔔</div>
+          <div class="admin-stat-num">{{ stats.notices }}</div>
+          <div class="admin-stat-label">Visible Notices</div>
+          <span class="admin-stat-link">Manage →</span>
+        </div>
+        <div class="admin-stat-card" (click)="setTab('circulars')">
+          <div class="admin-stat-icon">📢</div>
+          <div class="admin-stat-num">{{ stats.circulars }}</div>
+          <div class="admin-stat-label">Visible Circulars</div>
+          <span class="admin-stat-link">Manage →</span>
+        </div>
+        <div class="admin-stat-card" (click)="setTab('documents')">
+          <div class="admin-stat-icon">📁</div>
+          <div class="admin-stat-num">{{ stats.documents }}</div>
+          <div class="admin-stat-label">Visible Documents</div>
+          <span class="admin-stat-link">Manage →</span>
+        </div>
+        <div class="admin-stat-card" (click)="setTab('departments')">
+          <div class="admin-stat-icon">🎓</div>
+          <div class="admin-stat-num">{{ stats.departments }}</div>
+          <div class="admin-stat-label">Departments</div>
+          <span class="admin-stat-link">Manage →</span>
+        </div>
+      </div>
+
+      <div class="admin-quick-actions">
+        <h3>Quick Actions</h3>
+        <div class="admin-quick-grid">
+          <button class="admin-quick-btn" (click)="setTab('notices'); showAddNotice=true">+ Add Notice</button>
+          <button class="admin-quick-btn" (click)="setTab('circulars'); showAddCircular=true">+ Add Circular</button>
+          <button class="admin-quick-btn" (click)="setTab('documents')">+ Upload Document</button>
+          <button class="admin-quick-btn" (click)="setTab('departments'); showAddDepartment=true">+ Add Department</button>
+          <button class="admin-quick-btn" (click)="setTab('settings')">Edit Settings</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── NOTICES ───────────────────────────────────────── -->
+    <section *ngIf="activeTab==='notices'">
+      <div class="admin-page-header">
+        <div>
+          <h1>Manage Notices</h1>
+          <p>Notices appear in the scrolling ticker on the homepage.</p>
+        </div>
+        <button class="admin-add-btn" (click)="showAddNotice=!showAddNotice">
+          {{ showAddNotice ? '✕ Cancel' : '+ Add Notice' }}
+        </button>
+      </div>
+
+      <!-- Add form -->
+      <div class="admin-form-card" *ngIf="showAddNotice">
+        <h3>New Notice</h3>
+        <div class="admin-form-row">
+          <div class="admin-field admin-field-full">
+            <label>Notice Text *</label>
+            <textarea [(ngModel)]="newNotice.text" rows="3" placeholder="e.g. Nov-2025 Results Now Available"></textarea>
+          </div>
+        </div>
+
+        <div class="admin-upload-card admin-circular-upload">
+          <h3>Upload PDF / Document (Optional)</h3>
+          <div class="admin-circular-upload-row">
+            <input 
+              type="file" 
+              id="noticeFileInput"
+              accept=".pdf,.doc,.docx,.xls,.xlsx,.ppt,.pptx"
+              (change)="onNoticeFileSelect($event)"
+              class="admin-file-input">
+            <button 
+              class="admin-save-btn"
+              (click)="uploadNoticeFile()"
+              [disabled]="!noticeFile || noticeUploading">
+              {{ noticeUploading ? 'Uploading...' : '⬆ Upload' }}
+            </button>
+          </div>
+          <div class="admin-upload-progress" *ngIf="noticeUploading">
+            <div class="admin-progress-bar">
+              <div class="admin-progress-fill" [style.width]="noticeUploadProgress + '%' "></div>
+            </div>
+            <span>Uploading {{ noticeUploadProgress }}%...</span>
+          </div>
+        </div>
+
+        <div class="admin-form-row">
+          <div class="admin-field admin-field-full">
+            <label>Link URL (optional, auto-filled after upload)</label>
+            <input type="url" [(ngModel)]="newNotice.url" placeholder="https://... or /uploads/file.pdf">
+          </div>
+        </div>
+        <button class="admin-save-btn" (click)="addNotice()">Save Notice</button>
+      </div>
+
+      <!-- List -->
+      <div class="admin-list">
+        <div class="admin-list-item" *ngFor="let n of notices; let i = index">
+
+          <!-- View mode -->
+          <div class="admin-list-content" *ngIf="editingNoticeIdx !== i">
+            <div class="admin-list-title">{{ n.text }}</div>
+            <div class="admin-list-meta" *ngIf="n.url">🔗 {{ n.url }}</div>
+          </div>
+
+          <!-- Edit mode -->
+          <div class="admin-list-edit" *ngIf="editingNoticeIdx === i">
+            <input type="text"  [(ngModel)]="editNoticeData.text" class="admin-inline-input" placeholder="Notice text">
+            <input type="url"   [(ngModel)]="editNoticeData.url"  class="admin-inline-input" placeholder="URL">
+          </div>
+
+          <div class="admin-list-actions">
+            <ng-container *ngIf="editingNoticeIdx !== i">
+              <button class="admin-edit-btn" (click)="startEditNotice(i, n)">✏ Edit</button>
+            </ng-container>
+            <ng-container *ngIf="editingNoticeIdx === i">
+              <button class="admin-save-btn-sm" (click)="saveNotice(i)">✓ Save</button>
+              <button class="admin-cancel-btn"  (click)="editingNoticeIdx=-1">✕</button>
+            </ng-container>
+            <button class="admin-delete-btn" (click)="deleteNotice(i)">🗑</button>
+          </div>
+
+        </div>
+        <div class="admin-empty" *ngIf="!notices.length">No notices yet. Add one above.</div>
+      </div>
+    </section>
+
+    <!-- ── CIRCULARS ─────────────────────────────────────── -->
+    <section *ngIf="activeTab==='circulars'">
+      <div class="admin-page-header">
+        <div>
+          <h1>Manage Circulars</h1>
+          <p>Exam circulars, postponement notices and official announcements.</p>
+        </div>
+        <button class="admin-add-btn" (click)="showAddCircular=!showAddCircular">
+          {{ showAddCircular ? '✕ Cancel' : '+ Add Circular' }}
+        </button>
+      </div>
+
+      <!-- Add form -->
+      <div class="admin-form-card" *ngIf="showAddCircular">
+        <h3>New Circular</h3>
+        <div class="admin-form-row">
+          <div class="admin-field">
+            <label>Title *</label>
+            <input type="text" [(ngModel)]="newCircular.title" placeholder="e.g. Exam Circular May 2025">
+          </div>
+          <div class="admin-field">
+            <label>Date</label>
+            <input type="date" [(ngModel)]="newCircular.date">
+          </div>
+        </div>
+
+        <div class="admin-form-row">
+          <div class="admin-field admin-field-full">
+            <label>Description</label>
+            <textarea [(ngModel)]="newCircular.description" rows="3" placeholder="Short description for this circular"></textarea>
+          </div>
+        </div>
+
+        <!-- Upload section -->
+        <div class="admin-upload-card admin-circular-upload">
+          <h3>Upload PDF / Document (Optional)</h3>
+          <div class="admin-circular-upload-row">
+            <input 
+              type="file" 
+              id="circularFileInput"
+              accept=".pdf,.doc,.docx,.xls,.xlsx,.ppt,.pptx"
+              (change)="onCircularFileSelect($event)"
+              class="admin-file-input">
+            <button 
+              class="admin-save-btn"
+              (click)="uploadCircularFile()"
+              [disabled]="!circularFile || circularUploading">
+              {{ circularUploading ? 'Uploading...' : '⬆ Upload' }}
+            </button>
+          </div>
+          <div class="admin-upload-progress" *ngIf="circularUploading">
+            <div class="admin-progress-bar">
+              <div class="admin-progress-fill" [style.width]="circularUploadProgress + '%' "></div>
+            </div>
+            <span>Uploading {{ circularUploadProgress }}%...</span>
+          </div>
+        </div>
+
+        <!-- Document URL field -->
+        <div class="admin-form-row">
+          <div class="admin-field">
+            <label>Document URL * (auto-filled after upload)</label>
+            <input type="text" [(ngModel)]="newCircular.url" placeholder="https:// or /uploads/file.pdf">
+          </div>
+        </div>
+
+        <button class="admin-save-btn" (click)="addCircular()">Save Circular</button>
+      </div>
+
+      <!-- List -->
+      <div class="admin-list">
+        <div class="admin-list-item" *ngFor="let c of circulars">
+          <div class="admin-list-content">
+            <div class="admin-list-title">{{ c.title }}</div>
+            <div class="admin-list-meta" *ngIf="c.description">{{ c.description }}</div>
+            <div class="admin-list-meta">📅 {{ c.date }} &nbsp;|&nbsp; 🔗 {{ c.url }}</div>
+          </div>
+          <div class="admin-list-actions">
+            <a [href]="c.url" target="_blank" class="admin-view-btn">View</a>
+            <button class="admin-delete-btn" (click)="deleteCircular(c.id)">🗑</button>
+          </div>
+        </div>
+        <div class="admin-empty" *ngIf="!circulars.length">No circulars yet.</div>
+      </div>
+    </section>
+
+    <!-- ── DOCUMENTS ─────────────────────────────────────── -->
+    <section *ngIf="activeTab==='documents'">
+      <div class="admin-page-header">
+        <div>
+          <h1>Document Manager</h1>
+          <p>Upload PDFs, Word docs, Excel files. Max 20MB per file.</p>
+        </div>
+      </div>
+
+      <!-- Upload card -->
+      <div class="admin-upload-card">
+        <h3>Upload New Document</h3>
+        <div class="admin-form-row">
+          <div class="admin-field">
+            <label>Category</label>
+            <select [(ngModel)]="uploadCategory" class="admin-select">
+              <option *ngFor="let cat of categories" [value]="cat.value">{{ cat.label }}</option>
+            </select>
+          </div>
+          <div class="admin-field">
+            <label>Select File (PDF, DOC, XLS, JPG — max 20MB)</label>
+            <input type="file"
+                   (change)="onFileSelect($event)"
+                   accept=".pdf,.doc,.docx,.xls,.xlsx,.jpg,.jpeg,.png,.rar,.zip"
+                   class="admin-file-input">
+          </div>
+        </div>
+
+        <!-- Progress -->
+        <div class="admin-upload-progress" *ngIf="uploading">
+          <div class="admin-progress-bar">
+            <div class="admin-progress-fill" [style.width]="uploadProgress + '%'"></div>
+          </div>
+          <span>Uploading {{ uploadProgress }}%...</span>
+        </div>
+
+        <!-- Success -->
+        <div class="admin-upload-success" *ngIf="uploadSuccess">
+          ✅ Uploaded! URL: <code>{{ lastUploadUrl }}</code>
+          <button (click)="copyUrl(lastUploadUrl)" class="admin-copy-btn">Copy URL</button>
+        </div>
+
+        <button class="admin-save-btn"
+                (click)="uploadDocument()"
+                [disabled]="!selectedFile || uploading">
+          {{ uploading ? 'Uploading...' : '⬆ Upload Document' }}
+        </button>
+      </div>
+
+      <!-- Filter -->
+      <div class="admin-docs-filter">
+        <label>Filter by category:</label>
+        <select [(ngModel)]="filterCategory" (change)="loadDocuments()" class="admin-select-sm">
+          <option value="">All</option>
+          <option *ngFor="let cat of categories" [value]="cat.value">{{ cat.label }}</option>
+        </select>
+      </div>
+
+      <!-- Documents list -->
+      <div class="admin-list">
+        <div class="admin-list-item" *ngFor="let d of documents">
+          <div class="admin-list-content">
+            <div class="admin-list-title">{{ d.originalName }}</div>
+            <div class="admin-list-meta">
+              📂 {{ d.category }} &nbsp;|&nbsp;
+              📅 {{ d.uploadedAt | date:'dd MMM yyyy' }} &nbsp;|&nbsp;
+              💾 {{ (d.size / 1024).toFixed(1) }} KB
+            </div>
+            <code class="admin-url-display">{{ getFullUrl(d.url) }}</code>
+          </div>
+          <div class="admin-list-actions">
+            <a [href]="getFullUrl(d.url)" target="_blank" class="admin-view-btn">View</a>
+            <button (click)="copyUrl(getFullUrl(d.url))" class="admin-copy-btn-sm">Copy URL</button>
+            <button class="admin-delete-btn" (click)="deleteDocument(d.id)">🗑</button>
+          </div>
+        </div>
+        <div class="admin-empty" *ngIf="!documents.length">No documents uploaded yet.</div>
+      </div>
+    </section>
+
+    <!-- ── DEPARTMENTS ───────────────────────────────────── -->
+    <section *ngIf="activeTab==='departments'">
+      <div class="admin-page-header">
+        <div>
+          <h1>Manage Departments</h1>
+          <p>Create, edit and remove departments shown on the academics pages.</p>
+        </div>
+        <button class="admin-add-btn" (click)="showAddDepartment=!showAddDepartment">
+          {{ showAddDepartment ? '✕ Cancel' : '+ Add Department' }}
+        </button>
+      </div>
+
+      <div class="admin-form-card" *ngIf="showAddDepartment">
+        <h3>New Department</h3>
+        <div class="admin-form-row">
+          <div class="admin-field">
+            <label>Department Name *</label>
+            <input type="text" [(ngModel)]="newDepartment.name" placeholder="e.g. Artificial Intelligence">
+          </div>
+          <div class="admin-field">
+            <label>Department ID (optional)</label>
+            <input type="text" [(ngModel)]="newDepartment.id" placeholder="e.g. ai">
+          </div>
+        </div>
+
+        <div class="admin-form-row">
+          <div class="admin-field">
+            <label>Short Name</label>
+            <input type="text" [(ngModel)]="newDepartment.shortName" placeholder="e.g. AI">
+          </div>
+          <div class="admin-field">
+            <label>Icon</label>
+            <input type="text" [(ngModel)]="newDepartment.icon" placeholder="e.g. 🤖">
+          </div>
+        </div>
+
+        <div class="admin-form-row">
+          <div class="admin-field">
+            <label>Duration</label>
+            <input type="text" [(ngModel)]="newDepartment.duration" placeholder="e.g. 3 Years">
+          </div>
+          <div class="admin-field">
+            <label>Image URL</label>
+            <input type="text" [(ngModel)]="newDepartment.image" placeholder="https://...">
+          </div>
+        </div>
+
+        <div class="admin-form-row">
+          <div class="admin-field admin-field-full">
+            <label>Description</label>
+            <textarea [(ngModel)]="newDepartment.description" rows="3" placeholder="Department overview"></textarea>
+          </div>
+        </div>
+
+        <button class="admin-save-btn" (click)="addDepartment()">Save Department</button>
+      </div>
+
+      <div class="admin-list">
+        <div class="admin-list-item" *ngFor="let d of departments">
+          <div class="admin-list-content" *ngIf="editingDepartmentId !== d.id">
+            <div class="admin-list-title">{{ d.icon }} {{ d.name }} <small>({{ d.id }})</small></div>
+            <div class="admin-list-meta">{{ d.shortName || 'NA' }} · {{ d.duration || '3 Years' }}</div>
+            <div class="admin-list-meta" *ngIf="d.description">{{ d.description }}</div>
+          </div>
+
+          <div class="admin-list-edit" *ngIf="editingDepartmentId === d.id">
+            <input type="text" [(ngModel)]="editDepartmentData.name" class="admin-inline-input" placeholder="Department name">
+            <input type="text" [(ngModel)]="editDepartmentData.shortName" class="admin-inline-input" placeholder="Short name">
+            <input type="text" [(ngModel)]="editDepartmentData.icon" class="admin-inline-input" placeholder="Icon">
+            <input type="text" [(ngModel)]="editDepartmentData.duration" class="admin-inline-input" placeholder="Duration">
+            <input type="text" [(ngModel)]="editDepartmentData.image" class="admin-inline-input" placeholder="Image URL">
+            <textarea [(ngModel)]="editDepartmentData.description" class="admin-inline-input" rows="3" placeholder="Description"></textarea>
+          </div>
+
+          <div class="admin-list-actions">
+            <ng-container *ngIf="editingDepartmentId !== d.id">
+              <button class="admin-edit-btn" (click)="startEditDepartment(d)">✏ Edit</button>
+            </ng-container>
+            <ng-container *ngIf="editingDepartmentId === d.id">
+              <button class="admin-save-btn-sm" (click)="saveDepartment()">✓ Save</button>
+              <button class="admin-cancel-btn" (click)="editingDepartmentId=''">✕</button>
+            </ng-container>
+            <button class="admin-delete-btn" (click)="deleteDepartment(d.id)">🗑</button>
+          </div>
+        </div>
+        <div class="admin-empty" *ngIf="!departments.length">No departments found.</div>
+      </div>
+    </section>
+
+    <!-- ── SETTINGS ──────────────────────────────────────── -->
+    <section *ngIf="activeTab==='settings'">
+      <div class="admin-page-header">
+        <div>
+          <h1>College Settings</h1>
+          <p>Update contact information and institution details.</p>
+        </div>
+      </div>
+
+      <div class="admin-form-card" *ngIf="settings">
+        <div class="admin-field">
+          <label>College Name</label>
+          <input type="text" [(ngModel)]="settings.collegeName">
+        </div>
+        <div class="admin-field">
+          <label>Phone Number</label>
+          <input type="text" [(ngModel)]="settings.phone">
+        </div>
+        <div class="admin-field">
+          <label>Email Address</label>
+          <input type="email" [(ngModel)]="settings.email">
+        </div>
+        <div class="admin-field">
+          <label>Address</label>
+          <input type="text" [(ngModel)]="settings.address">
+        </div>
+        <div class="admin-form-actions">
+          <button class="admin-save-btn" (click)="saveSettings()">Save Settings</button>
+          <span class="admin-save-success" *ngIf="settingsSaved">✅ Settings saved!</span>
+        </div>
+      </div>
+    </section>
+
+  </main>
+</div>

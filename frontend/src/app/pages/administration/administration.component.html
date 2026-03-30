@@ -1,0 +1,50 @@
+    <div class="sub-hero">
+      <div class="sub-hero-inner">
+        <a routerLink="/" class="back-btn">← Back to Home</a>
+        <div class="s-tag">Governance &amp; Transparency</div>
+        <h1 class="sub-page-title">Administration Portal</h1>
+        <p class="sub-page-desc">NBA accreditation documents, AICTE EOA letters, audit reports, budgets and official downloads — all in one place.</p>
+      </div>
+    </div>
+
+    <div class="sub-content">
+
+      <!-- NBA Accreditation -->
+      <div class="sub-section">
+        <div class="sub-sec-head"><h2 class="sub-sec-title">NBA Accreditation</h2></div>
+        <div class="sub-grid">
+          <div class="info-card" *ngFor="let a of accreditation">
+            <span class="info-icon">{{ a.icon }}</span>
+            <h4>{{ a.title }}</h4>
+            <p>{{ a.description }}</p>
+            <a [href]="a.docUrl" target="_blank" class="info-link">{{ a.label }} ↗</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- AICTE EOA Letters -->
+      <div class="sub-section">
+        <div class="sub-sec-head"><h2 class="sub-sec-title">AICTE EOA Letters</h2></div>
+        <div class="sub-grid g4">
+          <div class="info-card eoa-card" *ngFor="let e of eoaLetters">
+            <span class="info-icon">📑</span>
+            <h4>EOA {{ e.year }}</h4>
+            <a [href]="e.docUrl" target="_blank" class="info-link">Download ↗</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Finance, Audit & Governance -->
+      <div class="sub-section">
+        <div class="sub-sec-head"><h2 class="sub-sec-title">Finance, Audit &amp; Governance</h2></div>
+        <div class="sub-grid">
+          <div class="info-card" *ngFor="let f of finance">
+            <span class="info-icon">{{ f.icon }}</span>
+            <h4>{{ f.title }}</h4>
+            <p>{{ f.description }}</p>
+            <a *ngIf="f.docUrl" [href]="f.docUrl" target="_blank" class="info-link">{{ f.label }} ↗</a>
+          </div>
+        </div>
+      </div>
+
+    </div>

@@ -1,0 +1,72 @@
+    <div class="sub-hero">
+      <div class="sub-hero-inner">
+        <a routerLink="/" class="back-btn">← Back to Home</a>
+        <div class="s-tag">Career Opportunities</div>
+        <h1 class="sub-page-title">Placement &amp; Training Cell</h1>
+        <p class="sub-page-desc">Connecting BVVS Polytechnic graduates with India's leading industries. Our Placement Cell drives industry-institute interaction and campus recruitment all year round.</p>
+      </div>
+    </div>
+
+    <div class="sub-content" *ngIf="placement">
+
+      <!-- About the Cell -->
+      <div class="sub-section">
+        <div class="sub-sec-head"><h2 class="sub-sec-title">About the Cell</h2></div>
+        <div class="placement-about-block">
+          <p class="placement-desc">{{ placement.description }}</p>
+          <div class="placement-activities">
+            <div class="placement-activity" *ngFor="let a of placement.activities">
+              <span class="activity-dot">✦</span>
+              <p>{{ a }}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Recruiting Companies -->
+      <div class="sub-section">
+        <div class="sub-sec-head">
+          <h2 class="sub-sec-title">Our Recruiters</h2>
+          <span class="sub-sec-meta">Companies that regularly visit BVVS Polytechnic</span>
+        </div>
+        <div class="companies-grid">
+          <div class="company-card" *ngFor="let c of placement.companies">
+            <div class="company-initial">{{ c.name.charAt(0) }}</div>
+            <div class="company-info">
+              <h4>{{ c.name }}</h4>
+              <span class="company-sector">{{ c.sector }}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Placement Data -->
+      <div class="sub-section">
+        <div class="sub-sec-head"><h2 class="sub-sec-title">Placement Resources</h2></div>
+        <div class="sub-grid g2">
+          <a [href]="placement.placementDataUrl" target="_blank" class="download-card">
+            <span class="dl-icon">📊</span>
+            <div>
+              <h4>Placement Data</h4>
+              <p>Detailed placement statistics and company-wise recruitment data.</p>
+            </div>
+            <span class="dl-arrow">↗</span>
+          </a>
+          <a href="https://bvvspolytech.com/Admission.aspx" target="_blank" class="download-card highlight-card-dl">
+            <span class="dl-icon">✨</span>
+            <div>
+              <h4>Join BVVS Polytechnic</h4>
+              <p>Start your journey towards a successful engineering career. Apply now.</p>
+            </div>
+            <span class="dl-arrow">↗</span>
+          </a>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Loading -->
+    <div class="sub-content" *ngIf="!placement">
+      <div class="skeleton-line w60" style="height:32px;margin-bottom:20px"></div>
+      <div class="skeleton-line w80" style="height:20px;margin-bottom:12px"></div>
+    </div>

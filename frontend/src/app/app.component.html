@@ -1,0 +1,37 @@
+    <div id="cursor"></div>
+    <div id="cursor-ring"></div>
+    <canvas id="particles"></canvas>
+
+    <!-- Ticker - hidden on admin pages -->
+    <div class="ticker" *ngIf="!isAdminPage">
+      <div class="ticker-label">📢 Live</div>
+      <div class="ticker-inner">
+        <ng-container *ngFor="let n of notices">
+          <a class="ticker-item" [href]="n.url || '#'" target="_blank">{{ n.text }}</a>
+        </ng-container>
+        <ng-container *ngFor="let n of notices">
+          <a class="ticker-item" [href]="n.url || '#'" target="_blank">{{ n.text }}</a>
+        </ng-container>
+      </div>
+    </div>
+
+    <!-- Navbar - hidden on admin pages -->
+    <app-navbar *ngIf="!isAdminPage"></app-navbar>
+
+    <main>
+      <router-outlet></router-outlet>
+    </main>
+
+    <!-- Footer - hidden on admin pages -->
+    <app-footer *ngIf="!isAdminPage"></app-footer>
+
+    <!-- Global Video Modal -->
+    <div class="video-modal" id="videoModal" *ngIf="!isAdminPage">
+      <div class="video-modal-bg" id="videoBg"></div>
+      <div class="video-modal-inner">
+        <button class="video-modal-close" id="videoClose" aria-label="Close video">✕</button>
+        <video id="heroVideo" controls preload="none">
+          <source src="assets/videos/BVVS-POLYTECHNIC.mp4" type="video/mp4">
+        </video>
+      </div>
+    </div>

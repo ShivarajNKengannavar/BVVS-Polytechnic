@@ -1,0 +1,33 @@
+    <div class="sub-hero">
+      <div class="sub-hero-inner">
+        <a routerLink="/" class="back-btn">← Back to Home</a>
+        <div class="s-tag">Innovation &amp; Enterprise</div>
+        <h1 class="sub-page-title">Entrepreneurship &amp; Innovation</h1>
+        <p class="sub-page-desc">BVVS Polytechnic fosters a culture of innovation, startup thinking and entrepreneurship through 10 dedicated cells and programmes.</p>
+      </div>
+    </div>
+    <div class="sub-content">
+      <div class="sub-section">
+        <div class="sub-sec-head"><h2 class="sub-sec-title">Innovation Cells &amp; Programmes</h2></div>
+        <div class="sub-grid">
+          <div class="entre-card" *ngFor="let cell of cells">
+            <div class="entre-card-header">
+              <span class="entre-icon">{{ cell.icon }}</span>
+              <h3>{{ cell.title }}</h3>
+            </div>
+            <p>{{ cell.description }}</p>
+            <a [href]="cell.docUrl" target="_blank" class="info-link">View Document ↗</a>
+          </div>
+        </div>
+      </div>
+      <div class="sub-section">
+        <div class="nisp-banner">
+          <div>
+            <h3>NISP — National Innovation &amp; Startup Policy</h3>
+            <p>BVVS Polytechnic has implemented the National Innovation and Startup Policy framework as mandated by AICTE.</p>
+          </div>
+          <a href="http://nisp.bvvspolytech.com/" target="_blank" class="btn-glow"
+             style="font-size:0.84rem;padding:13px 26px;white-space:nowrap">Visit NISP Portal ↗</a>
+        </div>
+      </div>
+    </div>

@@ -1,0 +1,22 @@
+    <div class="sub-hero">
+      <div class="sub-hero-inner">
+        <a routerLink="/" class="back-btn">← Back to Home</a>
+        <div class="s-tag">Campus Infrastructure</div>
+        <h1 class="sub-page-title">Facilities</h1>
+        <p class="sub-page-desc">BVVS Polytechnic offers world-class infrastructure and student support systems to ensure holistic development of every student.</p>
+      </div>
+    </div>
+    <div class="sub-content">
+
+      <div class="sub-section">
+        <div class="sub-sec-head"><h2 class="sub-sec-title">Campus Facilities</h2></div>
+        <div class="sub-grid">
+          <div class="info-card" *ngFor="let f of facilities">
+            <span class="info-icon">{{ f.icon }}</span>
+            <h4>{{ f.title }}</h4>
+            <p>{{ f.description }}</p>
+          </div>
+        </div>
+      </div>
+
+    </div>

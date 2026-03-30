@@ -1,0 +1,109 @@
+<div class="sub-hero">
+  <div class="sub-hero-inner">
+    <a routerLink="/" class="back-btn">← Back to Home</a>
+    <div class="s-tag">📝 Admissions 2025–26</div>
+    <h1 class="sub-page-title">Admission</h1>
+    <p class="sub-page-desc">Join B.V.V.S. Polytechnic (Autonomous) Bagalkot — an NBA-accredited institution offering 9 diploma programmes with a proven track record of placement excellence since 1958.</p>
+  </div>
+</div>
+
+<div class="sub-content">
+
+  <!-- CTA Banner -->
+  <div class="adm-cta-banner">
+    <div>
+      <h2>Applications Open — 2025–26</h2>
+      <p>Admissions are done through Karnataka Diploma Common Entrance Test (DCET) and direct applications. Apply now to secure your seat.</p>
+    </div>
+    <div class="adm-cta-btns">
+      <a href="https://kea.kar.nic.in/" target="_blank" class="btn-glow" style="font-size:0.85rem;padding:12px 24px">Apply via KEA ↗</a>
+      <a href="https://bvvspolytech.com/pdf/CC%20Adm%20Detials%20(1).pdf" target="_blank" class="btn-ghost" style="font-size:0.85rem;padding:12px 24px">Admission Details ↗</a>
+    </div>
+  </div>
+
+  <!-- Departments & Seats -->
+  <div class="sub-section">
+    <div class="sub-sec-head"><h2 class="sub-sec-title">Diploma Programmes &amp; Seats</h2></div>
+    <div class="adm-dept-table">
+      <div class="adt-header">
+        <span>Programme</span>
+        <span>Duration</span>
+        <span>Intake</span>
+        <span>Action</span>
+      </div>
+      <div class="adt-row" *ngFor="let d of depts">
+        <span class="adt-name"><span class="adt-icon">{{ d.icon }}</span> {{ d.name }}</span>
+        <span class="adt-tag">3 Years (6 Sem)</span>
+        <span class="adt-seats">{{ d.seats }} Seats</span>
+        <button class="adt-btn" (click)="go('academics/' + d.id)">View Dept →</button>
+      </div>
+    </div>
+    <div class="adm-total-note">Total intake: 420 seats across 9 diploma programmes. Additional 10% supernumerary seats for lateral entry.</div>
+  </div>
+
+  <!-- Eligibility -->
+  <div class="sub-section">
+    <div class="sub-sec-head"><h2 class="sub-sec-title">Eligibility Criteria</h2></div>
+    <div class="sub-grid g2">
+      <div class="info-card" *ngFor="let e of eligibility">
+        <span class="info-icon">{{ e.icon }}</span>
+        <h4>{{ e.title }}</h4>
+        <p>{{ e.desc }}</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Lateral Entry -->
+  <div class="sub-section">
+    <div class="sub-sec-head"><h2 class="sub-sec-title">Lateral Entry (Direct 2nd Year)</h2></div>
+    <div class="sub-grid g2">
+      <div class="info-card" *ngFor="let l of lateralEntry">
+        <span class="info-icon">{{ l.icon }}</span>
+        <h4>{{ l.title }}</h4>
+        <p>{{ l.desc }}</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Admission Procedure -->
+  <div class="sub-section">
+    <div class="sub-sec-head"><h2 class="sub-sec-title">Admission Procedure</h2></div>
+    <div class="adm-steps">
+      <div class="adm-step-card" *ngFor="let s of procedure">
+        <div class="adm-step-num">{{ s.step }}</div>
+        <div>
+          <h4>{{ s.title }}</h4>
+          <p>{{ s.desc }}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Documents Required -->
+  <div class="sub-section">
+    <div class="sub-sec-head"><h2 class="sub-sec-title">Documents Required</h2></div>
+    <div class="sub-grid">
+      <div class="info-card" *ngFor="let d of importantDocs">
+        <span class="info-icon">{{ d.icon }}</span>
+        <h4>{{ d.title }}</h4>
+        <p>{{ d.desc }}</p>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- Contact for Admission -->
+  <div class="adm-contact-strip">
+    <div class="acs-icon">📞</div>
+    <div class="acs-text">
+      <h3>Admission Helpdesk</h3>
+      <p>For queries on admission procedure, seat availability and fee structure, contact our admission office.</p>
+    </div>
+    <div class="acs-contact">
+      <div>📞 08354-220879</div>
+      <div>✉️ principal.bvvsp&#64;gmail.com</div>
+      <div>🕐 Mon–Sat: 9AM–5PM</div>
+    </div>
+  </div>
+
+</div>

@@ -1,0 +1,423 @@
+﻿/*
+  Global light-theme overrides for legacy bvvs-design.css.
+  Keep specificity moderate and rely on import order (loaded last).
+*/
+
+:root {
+  --navy: #2a211b;
+  --dark: #2b221c;
+  --card: #efe9e3;
+  --gold: #c9b59c;
+  --gold2: #b8a188;
+  --gold3: #d9cfc7;
+  --blue: #4a3e33;
+  --blue2: #c9b59c;
+  --white: #efe9e3;
+  --muted: #4a3e33;
+  --border: #d9cfc7;
+  --bg-main: #f9f8f6;
+  --bg-alt: #efe9e3;
+  --surface: #efe9e3;
+  --surface-soft: #f4efea;
+  --text-primary: #1f1712;
+  --text-secondary: #2b221c;
+}
+
+html,
+body {
+  background: var(--bg-main);
+  color: var(--text-primary);
+}
+
+main {
+  background: var(--bg-main);
+}
+
+section {
+  padding: 88px 0;
+}
+
+section:nth-of-type(even),
+.about-sec,
+.skill-sec,
+.notice-strip {
+  background: var(--bg-alt);
+}
+
+.s-title,
+.sub-page-title,
+.sub-sec-title,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  color: var(--navy);
+}
+
+.s-desc,
+.sub-page-desc,
+p,
+li,
+label,
+small {
+  color: var(--text-secondary);
+}
+
+.hero {
+  min-height: calc(100svh - 64px);
+  background: var(--bg-main);
+}
+
+.hero-bg {
+  background:
+    radial-gradient(ellipse 70% 60% at 75% 40%, rgba(201, 181, 156, 0.22) 0%, transparent 55%),
+    radial-gradient(ellipse 50% 50% at 20% 70%, rgba(217, 207, 199, 0.35) 0%, transparent 50%);
+}
+
+.hero-grid-lines {
+  background-image:
+    linear-gradient(rgba(63, 52, 42, 0.08) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(63, 52, 42, 0.08) 1px, transparent 1px);
+}
+
+.hero h1,
+.hero h1 .lg,
+.hero-desc,
+.hero-sub-text,
+.scroll-hint {
+  color: var(--navy);
+}
+
+.hero-desc {
+  color: var(--text-secondary);
+}
+
+.btn-glow,
+.nav-cta,
+.admin-save-btn {
+  background: linear-gradient(135deg, #c9b59c, #b8a188);
+  color: #2a211b;
+}
+
+.btn-ghost {
+  border-color: #d9cfc7;
+  color: var(--navy);
+  background: #efe9e3;
+}
+
+.btn-ghost:hover {
+  border-color: #c9b59c;
+  background: #d9cfc7;
+  color: #2a211b;
+}
+
+.hero-card-wrap,
+.stat-tile,
+.sub-card,
+.skill-card,
+.prog-card,
+.ach-card,
+.results-box,
+.info-card,
+.company-card,
+.ext-link-card,
+.lib-stat,
+.admin-list-item,
+.admin-form-card,
+.admin-upload-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  box-shadow: 0 8px 28px rgba(63, 52, 42, 0.08);
+}
+
+.stat-n,
+.admin-stat-num,
+.tag-chip,
+.s-tag,
+.mcol-head,
+.mc-head {
+  color: #b8a188;
+}
+
+.notice-strip {
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+}
+
+.notice-label,
+.ticker {
+  background: linear-gradient(90deg, #c9b59c, #d9cfc7);
+  color: #2a211b;
+}
+
+.notice-list a,
+.ticker-item {
+  color: #1f1712;
+}
+
+.about-sec,
+.skill-sec,
+.programs-sec,
+.achievements-sec,
+.bento-sec,
+.dept-marquee-sec {
+  background: var(--bg-alt) !important;
+}
+
+.sub-card-body p,
+.info-card p,
+.skill-body p,
+.prog-body p,
+.ach-card p,
+.ach-item p,
+.results-box p,
+.cdtp-left p,
+.vc p,
+.footer-brand p,
+.footer-col ul a,
+.fci p,
+.fci a,
+.footer-bottom p,
+.back-btn,
+.sub-page-desc,
+.hero-sub-text,
+.hero-desc,
+.s-desc {
+  color: #2b221c !important;
+}
+
+.info-card h4,
+.download-card h4,
+.results-box h3,
+.sub-card-body h3,
+.placement-about-block h3,
+.placement-about-block h4,
+.accred-item-card h3,
+.sub-sec-title,
+.sub-page-title,
+.back-btn,
+.adm-step-card h4,
+.ecb-text h3,
+.sl-schol-info h3,
+.sl-sports-intro h3,
+.sl-alumni-text h3 {
+  color: #2a211b !important;
+}
+
+.info-card p,
+.download-card p,
+.accred-item-card p,
+.placement-desc,
+.placement-activity p,
+.company-sector,
+.adm-step-card p,
+.ecs-text p,
+.ecb-text p,
+.adm-total-note,
+.adm-fee-note,
+.acs-text p,
+.acs-contact,
+.sub-sec-meta,
+.results-box p,
+.sl-schol-info p,
+.sl-sports-intro p,
+.sl-alumni-text p {
+  color: #2b221c !important;
+}
+
+.h-badge,
+.tag-chip,
+.sub-pill,
+.facc {
+  background: #d9cfc7 !important;
+  color: #2a211b !important;
+  border: 1px solid rgba(201, 181, 156, 0.65) !important;
+}
+
+.info-card,
+.download-card,
+.results-box,
+.accred-item-card,
+.company-card,
+.placement-about-block,
+.adm-step-card,
+.adm-fee-table,
+.adm-contact-strip,
+.exam-cell-banner,
+.sl-schol-info,
+.sl-sports-intro,
+.sl-alumni-block,
+.sl-alum-stat {
+  background: #efe9e3 !important;
+  border-color: #d9cfc7 !important;
+}
+
+.accred-timeline-dot {
+  background: #efe9e3 !important;
+  border-color: #d9cfc7 !important;
+  color: #4a3e33 !important;
+}
+
+.accred-timeline-dot.active {
+  background: #d9cfc7 !important;
+  border-color: #c9b59c !important;
+  color: #2a211b !important;
+}
+
+.sub-card,
+.info-card,
+.prog-card,
+.ach-card,
+.skill-card,
+.results-box,
+.hero-card-wrap,
+.stat-tile,
+.h-badge,
+.sub-pill {
+  border-color: #d9cfc7 !important;
+  background: #efe9e3 !important;
+}
+
+.hero h1,
+.hero h2,
+.hero h3,
+.s-title,
+.sub-card-body h3,
+.info-title,
+.ach-item h3,
+.prog-title,
+.footer-col h5,
+.logo-words b {
+  color: #2a211b !important;
+}
+
+.notice-list a::before {
+  background: #c9b59c !important;
+  color: #2a211b !important;
+}
+
+.hero .lg,
+.stat-n,
+.stat-l,
+.tag-chip,
+.dept-explore-link,
+.drop-more,
+.mcol-head,
+.mc-head,
+.facc {
+  color: #b8a188 !important;
+}
+
+/* Home carousel controls visibility */
+.c-btn {
+  background: #efe9e3 !important;
+  border: 1px solid #d9cfc7 !important;
+  color: #2a211b !important;
+}
+
+.c-btn:hover {
+  background: #c9b59c !important;
+  border-color: #c9b59c !important;
+  color: #2a211b !important;
+}
+
+.speed-btn {
+  background: #f4efea !important;
+  color: #2b221c !important;
+  border-color: #d9cfc7 !important;
+}
+
+.speed-btn:hover {
+  background: #d9cfc7 !important;
+  border-color: #c9b59c !important;
+  color: #2a211b !important;
+}
+
+.inf-dot {
+  background: #d9cfc7 !important;
+}
+
+.inf-dot.active {
+  background: #c9b59c !important;
+  box-shadow: 0 0 8px rgba(201, 181, 156, 0.55) !important;
+}
+
+.sub-content,
+.wrap {
+  color: var(--text-primary);
+}
+
+.sub-card-body h3,
+.skill-body h3,
+.admin-list-title,
+.info-title,
+.dept-explore-link,
+.nav-login-btn,
+.nav-results-btn {
+  color: var(--navy);
+}
+
+.sub-card-body p,
+.skill-body p,
+.admin-list-meta,
+.info-desc,
+.company-sector,
+.admin-url-display,
+.nav-profile-chip .npc-name,
+.nav-profile-chip .npc-role {
+  color: var(--text-secondary);
+}
+
+input,
+select,
+textarea,
+.admin-inline-input,
+.admin-file-input,
+.admin-select,
+.admin-select-sm {
+  background: #efe9e3;
+  border: 1px solid #d9cfc7;
+  color: #1f1712;
+}
+
+input:focus,
+select:focus,
+textarea:focus,
+.admin-inline-input:focus,
+.admin-file-input:focus,
+.admin-select:focus,
+.admin-select-sm:focus {
+  border-color: #4a3e33;
+  box-shadow: 0 0 0 3px rgba(122, 106, 90, 0.2);
+  outline: none;
+}
+
+footer {
+  background: #f4efea;
+  border-top: 1px solid #d9cfc7;
+}
+
+footer a,
+footer p,
+footer li,
+footer h5,
+footer small,
+footer .logo-words b {
+  color: #2b221c;
+}
+
+footer .facc,
+footer .tag-chip {
+  color: #2a211b;
+  border-color: rgba(201, 181, 156, 0.65);
+  background: #d9cfc7;
+}
+
+/* Keep admin area identity but lighten it a bit if global overrides leak in */
+.admin-shell {
+  background: #f9f8f6;
+}
+
+

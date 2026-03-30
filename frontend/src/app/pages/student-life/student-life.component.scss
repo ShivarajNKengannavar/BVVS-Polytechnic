@@ -1,0 +1,202 @@
+/* Component-specific styles — global styles in src/styles.scss */
+
+// ════════════════════════════════════════════════════════════════════
+//  TAB STYLING
+// ════════════════════════════════════════════════════════════════════
+
+.sl-tabs {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-bottom: 36px;
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 16px;
+}
+
+.sl-tab {
+  padding: 9px 20px;
+  border-radius: 100px;
+  border: 1px solid transparent;
+  background: transparent;
+  color: var(--text-secondary);
+  font-size: 0.83rem;
+  font-weight: 700;
+  cursor: pointer;
+  font-family: var(--font-ui);
+  transition: all 0.2s;
+
+  &:hover {
+    color: var(--text-primary);
+    background: rgba(42, 92, 138, 0.08);
+  }
+
+  &.active {
+    background: rgba(212, 168, 67, 0.1);
+    border-color: var(--gold);
+    color: var(--gold2);
+  }
+}
+
+// ════════════════════════════════════════════════════════════════════
+//  INFO BLOCKS
+// ════════════════════════════════════════════════════════════════════
+
+.sl-sports-intro,
+.sl-schol-info {
+  background: var(--surface-soft);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 22px 24px;
+  margin-bottom: 24px;
+
+  h3 {
+    font-family: var(--font-display);
+    font-size: 1.2rem;
+    margin-bottom: 10px;
+  }
+
+  p {
+    font-size: 0.87rem;
+    color: var(--text-secondary);
+    line-height: 1.8;
+  }
+}
+
+// ════════════════════════════════════════════════════════════════════
+//  ALUMNI SECTION
+// ════════════════════════════════════════════════════════════════════
+
+.sl-alumni-block {
+  display: grid;
+  grid-template-columns: 1.5fr 1fr;
+  gap: 40px;
+  background: rgba(212, 168, 67, 0.05);
+  border: 1px solid rgba(212, 168, 67, 0.2);
+  border-radius: 20px;
+  padding: 36px;
+}
+
+.sl-alumni-text {
+  h3 {
+    font-family: var(--font-display);
+    font-size: 1.4rem;
+    margin-bottom: 12px;
+  }
+
+  p {
+    font-size: 0.87rem;
+    color: var(--text-secondary);
+    line-height: 1.8;
+    margin-bottom: 16px;
+  }
+}
+
+.sl-alumni-actions {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.sl-alumni-stats {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  justify-content: center;
+}
+
+.sl-alum-stat {
+  text-align: center;
+  padding: 16px;
+  background: #ffffff;
+  border-radius: 12px;
+  border: 1px solid var(--border);
+}
+
+.sl-alum-num {
+  font-family: var(--font-display);
+  font-size: 1.8rem;
+  color: var(--gold2);
+  line-height: 1;
+}
+
+.sl-alum-label {
+  font-size: 0.7rem;
+  color: var(--muted);
+  font-family: var(--font-mono);
+  letter-spacing: 0.08em;
+  margin-top: 4px;
+}
+
+// ════════════════════════════════════════════════════════════════════
+//  LOADING & ERROR STATES
+// ════════════════════════════════════════════════════════════════════
+
+.sl-loading {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  padding: 40px 20px;
+  text-align: center;
+
+  p {
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+  }
+}
+
+.sl-spinner {
+  width: 40px;
+  height: 40px;
+  border: 3px solid rgba(212, 168, 67, 0.2);
+  border-top-color: var(--gold2);
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.sl-error {
+  background: rgba(239, 68, 68, 0.1);
+  border: 1px solid rgba(239, 68, 68, 0.3);
+  border-radius: 12px;
+  padding: 16px;
+  margin-bottom: 24px;
+  font-size: 0.9rem;
+  color: #fca5a5;
+}
+
+// ════════════════════════════════════════════════════════════════════
+//  RESPONSIVE
+// ════════════════════════════════════════════════════════════════════
+
+@media (max-width: 900px) {
+  .sl-alumni-block {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 640px) {
+  .sl-tabs {
+    gap: 6px;
+  }
+
+  .sl-tab {
+    padding: 8px 16px;
+    font-size: 0.75rem;
+  }
+
+  .sl-alumni-block {
+    padding: 24px;
+    gap: 24px;
+  }
+
+  .sl-alumni-text h3 {
+    font-size: 1.1rem;
+  }
+}

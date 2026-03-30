@@ -1,0 +1,78 @@
+<div class="sub-hero">
+  <div class="sub-hero-inner">
+    <a routerLink="/" class="back-btn">← Back to Home</a>
+    <div class="s-tag">📋 Exam &amp; Results</div>
+    <h1 class="sub-page-title">Examinations</h1>
+    <p class="sub-page-desc">Results portals, exam rules, circulars, certificates, fee structure and all examination-related information for BVVS Polytechnic students.</p>
+  </div>
+</div>
+
+<div class="sub-content">
+
+  <!-- Quick Result Access -->
+  <div class="results-box">
+    <h3>Check Your Results</h3>
+    <p>Select your curriculum batch to view semester examination results.</p>
+    <div class="results-btns">
+      <a *ngFor="let r of results" [href]="r.url" target="_blank" class="rbtn">
+        📊 {{ r.label }}
+      </a>
+    </div>
+    <a routerLink="/results" class="results-all-link">View full results page →</a>
+  </div>
+
+  <!-- Rules & Regulations -->
+  <div class="sub-section">
+    <div class="sub-sec-head"><h2 class="sub-sec-title">Exam Rules &amp; Regulations</h2></div>
+    <div class="sub-grid g2">
+      <div class="info-card" *ngFor="let r of rules">
+        <span class="info-icon">{{ r.icon }}</span>
+        <h4>{{ r.title }}</h4>
+        <p>{{ r.description }}</p>
+        <a *ngIf="r.docUrl" [href]="r.docUrl" target="_blank" class="info-link">{{ r.label }} ↗</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Circulars -->
+  <div class="sub-section">
+    <div class="sub-sec-head">
+      <h2 class="sub-sec-title">Recent Circulars</h2>
+      <a routerLink="/circulars" class="info-link">View All →</a>
+    </div>
+    <div class="sub-grid g2">
+      <div class="info-card" *ngFor="let c of circulars">
+        <span class="info-icon">{{ c.icon }}</span>
+        <h4>{{ c.title }}</h4>
+        <p>{{ c.description }}</p>
+        <a *ngIf="c.docUrl" [href]="c.docUrl" target="_blank" class="info-link">{{ c.label }} ↗</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Certificates -->
+  <div class="sub-section">
+    <div class="sub-sec-head"><h2 class="sub-sec-title">Certificates &amp; Documents</h2></div>
+    <div class="sub-grid g2">
+      <a *ngFor="let d of certServices" [href]="d.url" target="_blank" class="download-card">
+        <span class="dl-icon">{{ d.icon }}</span>
+        <div><h4>{{ d.title }}</h4><p>{{ d.desc }}</p></div>
+        <span class="dl-arrow">↗</span>
+      </a>
+    </div>
+  </div>
+
+  <!-- Contact Exam Cell -->
+  <div class="exam-cell-banner">
+    <div class="ecb-icon">🏛</div>
+    <div class="ecb-text">
+      <h3>Examination Cell</h3>
+      <p>For all examination-related queries — fee payments, corrections, duplicates and revaluation — contact the Examination Cell directly.</p>
+    </div>
+    <div class="ecb-contact">
+      <div>📞 08354-220879</div>
+      <div>✉️ principal.bvvsp&#64;gmail.com</div>
+    </div>
+  </div>
+
+</div>

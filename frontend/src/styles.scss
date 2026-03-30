@@ -1,0 +1,21 @@
+// ═══════════════════════════════════════════════════
+//  BVVS Polytechnic — Global Stylesheet Entry Point
+//
+//  Import order matters:
+//  1. Variables   → design tokens (no output)
+//  2. Mixins      → reusable helpers (no output)
+//  3. Base        → reset, body, animations, layout
+//  4. Components  → shared component styles
+// ═══════════════════════════════════════════════════
+
+@use 'styles/variables' as *;
+@use 'styles/mixins'    as *;
+@use 'styles/base';
+@use 'styles/components';
+
+// ── Legacy design CSS (to be migrated progressively) ──
+// This file contains the original hero, navbar, footer,
+// department, carousel and home section styles.
+// Import it last so our SCSS overrides take priority.
+@import 'assets/styles/bvvs-design.css';
+@import 'styles/light-theme-overrides';

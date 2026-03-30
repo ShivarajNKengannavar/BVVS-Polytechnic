@@ -1,0 +1,64 @@
+<div class="admin-login-page">
+  <div class="admin-login-card">
+
+    <!-- Header -->
+    <div class="admin-login-header">
+      <div class="admin-logo-hex">BV</div>
+      <h1>Unified Login Portal</h1>
+      <p>Students, Faculty, Librarian and Admin</p>
+    </div>
+
+    <!-- Form -->
+    <form (ngSubmit)="onLogin()" class="admin-login-form" autocomplete="on">
+
+      <div class="admin-field">
+        <label for="username">Username</label>
+        <input
+          id="username"
+          type="text"
+          name="username"
+          [(ngModel)]="username"
+            placeholder="Enter username"
+          autocomplete="username"
+          required>
+      </div>
+
+      <div class="admin-field">
+        <label for="password">Password</label>
+        <div class="admin-pwd-wrap">
+          <input
+            id="password"
+            [type]="showPwd ? 'text' : 'password'"
+            name="password"
+            [(ngModel)]="password"
+            placeholder="Enter password"
+            autocomplete="current-password"
+            required>
+          <button type="button" class="admin-toggle-pwd" (click)="showPwd = !showPwd" [title]="showPwd ? 'Hide' : 'Show'">
+            {{ showPwd ? '🙈' : '👁' }}
+          </button>
+        </div>
+      </div>
+
+      <div class="admin-login-error" *ngIf="error">
+        ⚠ {{ error }}
+      </div>
+
+      <button type="submit" class="admin-login-btn" [disabled]="loading">
+        <span *ngIf="!loading">Login →</span>
+        <span *ngIf="loading" class="admin-spinner">Signing in...</span>
+      </button>
+
+      <div class="login-hint">
+        <b>Supported roles:</b>
+        <span *ngFor="let role of roleHints; let i = index">{{ role }}<span *ngIf="i < roleHints.length - 1">, </span></span>
+      </div>
+
+    </form>
+
+    <div class="admin-login-footer">
+      <a routerLink="/">← Back to main website</a>
+    </div>
+
+  </div>
+</div>

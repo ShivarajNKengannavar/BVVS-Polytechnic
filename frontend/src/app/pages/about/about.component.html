@@ -1,0 +1,68 @@
+    <!-- Sub-page hero -->
+    <div class="sub-hero">
+      <div class="sub-hero-inner">
+        <a routerLink="/" class="back-btn">← Back to Home</a>
+        <div class="s-tag">Our Story</div>
+        <h1 class="sub-page-title">About B.V.V.S. Polytechnic</h1>
+        <p class="sub-page-desc">A premier technical institution under the Basaveshwar Veerashaiva Vidyavardhak Sangha, established in 1958 and serving North Karnataka for over six decades.</p>
+      </div>
+    </div>
+
+    <div class="sub-content">
+
+      <!-- History -->
+      <div class="sub-section">
+        <div class="sub-sec-head"><h2 class="sub-sec-title">Our History</h2></div>
+        <div class="history-block">
+          <div class="history-year-badge">
+            <span>1958</span>
+            <small>Founded</small>
+          </div>
+          <p class="history-text" *ngIf="about">{{ about.history }}</p>
+        </div>
+      </div>
+
+      <!-- Vision & Mission -->
+      <div class="sub-section" *ngIf="about">
+        <div class="sub-sec-head"><h2 class="sub-sec-title">Vision &amp; Mission</h2></div>
+        <div class="sub-grid g2">
+          <div class="info-card vm-card">
+            <span class="info-icon">🎯</span>
+            <h4>Our Vision</h4>
+            <p>{{ about.vision }}</p>
+          </div>
+          <div class="info-card vm-card">
+            <span class="info-icon">🚀</span>
+            <h4>Our Mission</h4>
+            <p>{{ about.mission }}</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Institution Overview -->
+      <div class="sub-section">
+        <div class="sub-sec-head"><h2 class="sub-sec-title">Institution Overview</h2></div>
+        <div class="sub-grid g2">
+          <div class="info-card" *ngFor="let item of overview">
+            <span class="info-icon">{{ item.icon }}</span>
+            <h4>{{ item.title }}</h4>
+            <p>{{ item.description }}</p>
+            <a *ngIf="item.docUrl" [href]="item.docUrl" target="_blank" class="info-link">View Document ↗</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Entrepreneurship & Innovation -->
+      <div class="sub-section">
+        <div class="sub-sec-head"><h2 class="sub-sec-title">Entrepreneurship &amp; Innovation</h2></div>
+        <div class="sub-grid">
+          <div class="info-card" *ngFor="let item of entrepreneurship">
+            <span class="info-icon">{{ item.icon }}</span>
+            <h4>{{ item.title }}</h4>
+            <p>{{ item.description }}</p>
+            <a *ngIf="item.docUrl" [href]="item.docUrl" target="_blank" class="info-link">View Details ↗</a>
+          </div>
+        </div>
+      </div>
+
+    </div>

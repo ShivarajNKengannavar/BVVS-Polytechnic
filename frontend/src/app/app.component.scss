@@ -1,0 +1,87 @@
+/* ── These styles live here because they belong to app-root directly ──
+   All other design tokens come from src/styles.scss → bvvs-design.css  */
+
+/* Cursor */
+#cursor {
+  width: 10px; height: 10px;
+  background: var(--gold);
+  border-radius: 50%;
+  position: fixed; top: 0; left: 0; z-index: 99999;
+  pointer-events: none;
+  transform: translate(-50%, -50%);
+  transition: width .2s, height .2s;
+  mix-blend-mode: difference;
+}
+#cursor-ring {
+  width: 36px; height: 36px;
+  border: 1.5px solid rgba(212,168,67,0.55);
+  border-radius: 50%;
+  position: fixed; top: 0; left: 0; z-index: 99998;
+  pointer-events: none;
+  transform: translate(-50%, -50%);
+  transition: transform .12s cubic-bezier(.17,.67,.83,.67);
+}
+
+/* Particles canvas */
+#particles {
+  position: fixed; inset: 0; z-index: 0;
+  pointer-events: none; opacity: 0.55;
+}
+
+/* Keep main content above particles */
+main { position: relative; z-index: 10; }
+
+/* Video modal */
+.video-modal {
+  display: none;
+  position: fixed; inset: 0; z-index: 9999;
+  background: rgba(3, 8, 18, 0.95);
+  backdrop-filter: blur(18px);
+  align-items: center; justify-content: center;
+  padding: 24px;
+}
+.video-modal.open {
+  display: flex;
+  animation: modalIn .3s ease;
+}
+@keyframes modalIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+.video-modal-inner {
+  position: relative;
+  width: 100%; max-width: 1100px;
+  animation: scaleIn .3s cubic-bezier(.2,.8,.2,1);
+}
+@keyframes scaleIn {
+  from { transform: scale(0.88); opacity: 0; }
+  to   { transform: scale(1);    opacity: 1; }
+}
+.video-modal-inner video {
+  width: 100%;
+  border-radius: 16px;
+  box-shadow: 0 40px 100px rgba(0,0,0,0.7);
+  display: block;
+  max-height: 80vh;
+  background: #000;
+}
+.video-modal-close {
+  position: absolute;
+  top: -48px; right: 0;
+  width: 40px; height: 40px;
+  background: rgba(255,255,255,0.1);
+  border: 1px solid rgba(255,255,255,0.2);
+  border-radius: 50%;
+  color: #fff; font-size: 1.2rem;
+  cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  transition: background .2s, transform .2s;
+}
+.video-modal-close:hover {
+  background: rgba(212,168,67,0.3);
+  transform: rotate(90deg);
+}
+.video-modal-bg {
+  position: absolute; inset: 0; z-index: -1; cursor: pointer;
+}
+

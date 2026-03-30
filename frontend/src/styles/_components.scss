@@ -1,0 +1,593 @@
+// ═══════════════════════════════════════════════════
+//  BVVS Polytechnic — Shared Component Styles
+// ═══════════════════════════════════════════════════
+@use 'variables' as *;
+@use 'mixins' as *;
+
+// ── Sub-card (department cards) ──────────────────
+.sub-card {
+  background: $card; border: 1px solid $border;
+  border-radius: $radius-xl; overflow: hidden;
+  text-decoration: none; color: inherit;
+  cursor: pointer; display: flex; flex-direction: column;
+  transition: $transition-base;
+
+  &:hover {
+    border-color: $border-gold;
+    transform: translateY(-5px);
+    box-shadow: $shadow-md;
+  }
+}
+
+.sub-card-img {
+  position: relative; height: 180px; overflow: hidden;
+
+  img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s ease; }
+  .sub-card-ov {
+    position: absolute; inset: 0;
+    background: linear-gradient(to top, rgba(5,13,26,0.9) 0%, transparent 60%);
+  }
+}
+
+.sub-card:hover .sub-card-img img { transform: scale(1.05); }
+
+.dept-icon-badge {
+  position: absolute; top: 12px; right: 12px;
+  font-size: 1.5rem;
+  filter: drop-shadow(0 2px 6px rgba(0,0,0,0.5));
+}
+
+.sub-card-body {
+  padding: 18px 18px 20px;
+  display: flex; flex-direction: column; gap: 6px; flex: 1;
+
+  h3 { font-size: 0.95rem; font-weight: 700; color: $navy; line-height: 1.3; }
+  p  { font-size: 0.8rem; color: $text-secondary; line-height: 1.6; flex: 1; }
+}
+
+.tag-chip {
+  display: inline-block; padding: 3px 10px;
+  border-radius: $radius-full;
+  background: $gold-light; border: 1px solid $border-gold;
+  color: $gold-2; font-size: $fs-xs; font-weight: 800;
+  letter-spacing: 0.06em; font-family: $font-mono;
+  text-transform: uppercase;
+}
+
+.sub-card-links {
+  display: flex; flex-wrap: wrap; gap: 6px; margin-top: 8px;
+}
+
+.sub-pill {
+  padding: 5px 12px; border-radius: $radius-full;
+  background: $card-hover; border: 1px solid $border;
+  color: $text-secondary; font-size: 0.72rem; font-weight: 700;
+  text-decoration: none; transition: $transition-fast;
+  &:hover { background: $gold-light; color: $gold; border-color: $border-gold; }
+}
+
+.dept-explore-link {
+  display: inline-flex; align-items: center; gap: 6px;
+  color: $gold; font-size: 0.77rem; font-weight: 700;
+  margin-top: 8px; transition: gap 0.2s;
+}
+.sub-card:hover .dept-explore-link { gap: 10px; }
+
+// ── Skill section ────────────────────────────────
+.skill-sec { padding: 80px 0; }
+
+.skill-grid {
+  display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px;
+
+  @include xl { grid-template-columns: repeat(2, 1fr); }
+  @include md { grid-template-columns: 1fr; }
+}
+
+.skill-card {
+  background: $card; border: 1px solid $border;
+  border-radius: $radius-xl; overflow: hidden;
+  transition: $transition-base;
+
+  &:hover { border-color: $border-gold; transform: translateY(-4px); }
+}
+
+.skill-icon-wrap {
+  position: relative; height: 160px; overflow: hidden;
+
+  img { width: 100%; height: 100%; object-fit: cover; }
+}
+
+.skill-icon-overlay {
+  position: absolute; inset: 0;
+  background: linear-gradient(to top, rgba(5,13,26,0.85), transparent 50%);
+}
+
+.skill-icon {
+  position: absolute; bottom: 12px; left: 16px;
+  font-size: 1.8rem;
+}
+
+.skill-body {
+  padding: 16px 18px 20px;
+
+  h3 { font-size: 0.92rem; font-weight: 700; margin-bottom: 6px; }
+  p  { font-size: 0.79rem; color: $text-secondary; line-height: 1.6; margin-bottom: 12px; }
+}
+
+.skill-tags {
+  display: flex; flex-wrap: wrap; gap: 6px;
+
+  span {
+    padding: 3px 10px; border-radius: $radius-full;
+    background: $card-hover; border: 1px solid $border;
+    font-size: 0.68rem; font-weight: 700;
+    color: $text-secondary; font-family: $font-mono;
+  }
+}
+
+.cdtp-strip {
+  display: flex; align-items: center; justify-content: space-between;
+  gap: 20px; flex-wrap: wrap;
+  padding: 24px 28px; border-radius: $radius-xl;
+  background: $gold-light; border: 1px solid $border-gold;
+  margin-top: 28px;
+}
+
+.cdtp-left { display: flex; align-items: center; gap: 16px; }
+.cdtp-badge {
+  padding: 6px 14px; border-radius: $radius-full;
+  @include gold-gradient;
+  color: $navy; font-weight: 800; font-size: 0.75rem;
+  font-family: $font-mono; letter-spacing: 0.08em; flex-shrink: 0;
+}
+
+// ── Department detail ────────────────────────────
+.dept-hero-img-wrap {
+  width: 100%; height: 300px; border-radius: $radius-xl;
+  overflow: hidden; position: relative;
+
+  img { width: 100%; height: 100%; object-fit: cover; filter: brightness(0.6); }
+}
+
+.dept-hero-overlay {
+  position: absolute; inset: 0;
+  background: linear-gradient(to top, rgba(5,13,26,0.85) 0%, transparent 60%);
+}
+
+.dept-duration-badge {
+  position: absolute; bottom: 18px; left: 22px;
+  @include gold-gradient;
+  color: $navy; font-weight: 800; font-size: 0.76rem;
+  padding: 5px 16px; border-radius: $radius-full;
+  font-family: $font-mono; letter-spacing: 0.06em;
+}
+
+.dept-about-grid {
+  display: grid; grid-template-columns: 1.4fr 1fr; gap: 40px;
+  align-items: start;
+
+  @include xl { grid-template-columns: 1fr; }
+}
+
+.dept-full-desc { font-size: 0.95rem; color: $text-secondary; line-height: 1.85; }
+
+.dept-quick-info { display: flex; flex-direction: column; gap: 10px; }
+
+.dqi-card {
+  display: flex; align-items: center; gap: 14px;
+  padding: 13px 16px; border-radius: $radius-md;
+  background: $card-hover; border: 1px solid $border;
+
+  .dqi-icon { font-size: 1.3rem; }
+  strong { display: block; font-size: 0.76rem; color: $gold-2; margin-bottom: 2px; }
+  span   { font-size: 0.8rem; color: $text-muted; }
+}
+
+// ── Subjects grid ────────────────────────────────
+.subjects-grid { display: flex; flex-wrap: wrap; gap: 10px; }
+
+.subject-pill {
+  display: inline-flex; align-items: center; gap: 9px;
+  padding: 9px 16px; border-radius: $radius-md;
+  background: $card-hover; border: 1px solid $border;
+  font-size: 0.83rem; font-weight: 600; transition: $transition-fast;
+
+  &:hover { background: $gold-light; border-color: $border-gold; transform: translateY(-2px); }
+}
+
+.sub-num {
+  width: 20px; height: 20px; border-radius: 50%;
+  @include gold-gradient;
+  color: $navy; font-size: 0.65rem; font-weight: 800;
+  display: flex; align-items: center; justify-content: center;
+  font-family: $font-mono; flex-shrink: 0;
+}
+
+// ── Placement ────────────────────────────────────
+.companies-grid {
+  display: grid; grid-template-columns: repeat(5, 1fr); gap: 14px;
+
+  @include xl { grid-template-columns: repeat(3, 1fr); }
+  @include md { grid-template-columns: repeat(2, 1fr); }
+}
+
+.company-card {
+  display: flex; align-items: center; gap: 14px;
+  padding: 16px; border-radius: $radius-lg;
+  background: $card; border: 1px solid $border;
+  transition: $transition-base;
+
+  &:hover { border-color: $border-gold; transform: translateY(-4px); }
+}
+
+.company-initial {
+  width: 42px; height: 42px; border-radius: $radius-md; flex-shrink: 0;
+  @include gold-gradient;
+  color: $navy; font-weight: 800; font-size: 1.1rem;
+  @include flex-center;
+}
+
+.company-info {
+  h4 { font-size: 0.87rem; font-weight: 700; margin-bottom: 3px; line-height: 1.3; }
+}
+
+.company-sector { font-size: 0.7rem; color: $text-muted; font-family: $font-mono; }
+
+// ── Library ──────────────────────────────────────
+.lib-stats-grid {
+  display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px;
+  margin-bottom: 40px;
+
+  @include xl { grid-template-columns: repeat(2, 1fr); }
+  @include sm { grid-template-columns: 1fr 1fr; }
+}
+
+.lib-stat {
+  padding: 24px 18px; border-radius: $radius-lg;
+  background: $card; border: 1px solid $border; text-align: center;
+}
+
+.lib-stat-n { font-family: $font-display; font-size: 1.9rem; color: $gold; line-height: 1; margin-bottom: 6px; }
+.lib-stat-l { font-size: $fs-xs; color: $text-muted; letter-spacing: 0.08em; text-transform: uppercase; font-family: $font-mono; }
+
+// ── Community / External links ───────────────────
+.external-links-grid {
+  display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px;
+
+  @include xl { grid-template-columns: repeat(2, 1fr); }
+  @include md { grid-template-columns: 1fr; }
+}
+
+.ext-link-card {
+  display: flex; align-items: flex-start; gap: 12px;
+  padding: 16px; border-radius: $radius-lg;
+  background: $card; border: 1px solid $border;
+  text-decoration: none; color: inherit; transition: $transition-base;
+
+  &:hover { border-color: $border-gold; transform: translateY(-3px); }
+
+  .ext-link-icon { font-size: 1.5rem; flex-shrink: 0; }
+  h4 { font-size: 0.85rem; font-weight: 700; margin-bottom: 3px; }
+  p  { font-size: 0.75rem; color: $text-muted; line-height: 1.5; margin: 0; }
+  .ext-link-arrow { margin-left: auto; color: $gold; font-size: 0.9rem; flex-shrink: 0; align-self: center; }
+}
+
+// ── Accreditation timeline ───────────────────────
+.accred-timeline { display: flex; flex-direction: column; }
+
+.accred-item {
+  display: flex; gap: 22px; align-items: flex-start;
+  padding-bottom: 22px; position: relative;
+
+  &:not(:last-child)::before {
+    content: ''; position: absolute; left: 20px; top: 44px; bottom: 0;
+    width: 2px; background: $border;
+  }
+}
+
+.accred-timeline-dot {
+  width: 40px; height: 40px; border-radius: 50%;
+  border: 2px solid $border; background: $card;
+  @include flex-center; flex-shrink: 0;
+  font-size: 0.85rem; color: $text-muted; margin-top: 4px;
+
+  &.active { border-color: $gold; background: $gold-light; color: $gold; }
+}
+
+.accred-item-card {
+  flex: 1; background: $card; border: 1px solid $border;
+  border-radius: $radius-lg; padding: 18px 22px; position: relative;
+
+  &.current { border-color: $border-gold; background: $gold-light; }
+
+  h3 { font-size: 0.98rem; font-weight: 700; margin-bottom: 6px; }
+  p  { font-size: 0.81rem; color: $text-secondary; line-height: 1.65; margin-bottom: 10px; }
+}
+
+.accred-item-badge {
+  display: inline-block; @include gold-gradient;
+  color: $navy; font-size: 0.62rem; font-weight: 800;
+  padding: 2px 10px; border-radius: $radius-full; margin-bottom: 8px;
+  letter-spacing: 0.08em; text-transform: uppercase;
+}
+
+.eoa-pill {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 12px 14px; border-radius: $radius-md;
+  background: $card; border: 1px solid $border;
+  text-decoration: none; color: inherit; transition: $transition-fast;
+
+  &:hover { border-color: $border-gold; background: $gold-light; transform: translateY(-2px); }
+}
+
+.eoa-year   { font-size: 0.83rem; font-weight: 700; color: $navy; font-family: $font-mono; }
+.eoa-dl     { color: $gold; font-size: 0.88rem; }
+
+// ── Entrepreneurship ─────────────────────────────
+.entre-card {
+  @include card;
+  padding: 22px 20px;
+  display: flex; flex-direction: column; gap: 10px;
+}
+
+.entre-card-header {
+  display: flex; align-items: center; gap: 12px;
+
+  h3 { font-size: 0.92rem; font-weight: 700; line-height: 1.3; }
+}
+
+.entre-icon { font-size: 1.9rem; flex-shrink: 0; }
+
+// ── Gallery ──────────────────────────────────────
+.gallery-intro-card {
+  display: flex; align-items: center; justify-content: space-between;
+  gap: 24px; flex-wrap: wrap;
+  padding: 34px; border-radius: $radius-xl;
+  background: $gold-light; border: 1px solid $border-gold;
+  margin-bottom: 40px;
+
+  h3 { font-family: $font-display; font-size: 1.4rem; margin-bottom: 8px; }
+  p  { font-size: 0.88rem; color: $text-secondary; max-width: 500px; line-height: 1.75; }
+}
+
+// ── Admission ────────────────────────────────────
+.adm-cta-banner {
+  display: flex; align-items: center; justify-content: space-between;
+  gap: 24px; flex-wrap: wrap;
+  background: $gold-light; border: 1px solid $border-gold;
+  border-radius: $radius-xl; padding: 30px 34px; margin-bottom: 48px;
+
+  h2 { font-family: $font-display; font-size: 1.5rem; margin-bottom: 6px; }
+  p  { font-size: 0.88rem; color: $text-muted; max-width: 500px; }
+}
+
+.adm-step-card {
+  display: flex; gap: 18px; align-items: flex-start;
+  padding: 18px 22px; border-radius: $radius-lg;
+  background: $card-hover; border: 1px solid $border;
+  transition: $transition-fast;
+
+  &:hover { background: $gold-light; border-color: $border-gold; }
+}
+
+.adm-step-num {
+  font-family: $font-display; font-size: 1.9rem;
+  color: $gold; line-height: 1; flex-shrink: 0; min-width: 38px;
+}
+
+.adm-step-card h4 { font-size: 0.93rem; font-weight: 700; color: $gold-2; margin-bottom: 5px; }
+.adm-step-card p  { font-size: 0.83rem; color: $text-secondary; line-height: 1.7; margin: 0; }
+
+.adm-points-list {
+  list-style: none; display: flex; flex-direction: column; gap: 8px; margin-top: 8px;
+
+  li {
+    display: flex; gap: 10px; align-items: flex-start;
+    font-size: 0.83rem; color: $text-secondary; line-height: 1.65;
+
+    &::before { content: '→'; color: $gold; font-weight: 700; flex-shrink: 0; margin-top: 1px; }
+  }
+}
+
+.adm-proc-item {
+  display: flex; gap: 16px; align-items: flex-start;
+  padding: 16px 20px; border-radius: $radius-md;
+  background: $card-hover;
+  border-left: 3px solid $gold;
+  border-top: 1px solid $border; border-right: 1px solid $border; border-bottom: 1px solid $border;
+  transition: $transition-fast;
+
+  &:hover { background: $gold-light; transform: translateX(4px); }
+}
+
+.adm-proc-dot {
+  width: 26px; height: 26px; border-radius: 50%;
+  @include gold-gradient;
+  color: $navy; font-size: 0.73rem; font-weight: 800;
+  @include flex-center; flex-shrink: 0;
+}
+
+.adm-proc-item p { font-size: 0.84rem; color: $text-secondary; line-height: 1.7; margin: 0; }
+
+.adm-dept-grid { display: flex; flex-wrap: wrap; gap: 10px; }
+
+.adm-dept-pill {
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 10px 16px; border-radius: $radius-full;
+  background: $card-hover; border: 1px solid $border;
+  color: $text-secondary; font-size: 0.81rem; font-weight: 600;
+  text-decoration: none; cursor: pointer; transition: $transition-fast;
+
+  &:hover { background: $gold-light; border-color: $gold; color: $gold-2; transform: translateY(-2px); }
+}
+
+// ── Bento grid ───────────────────────────────────
+.bento-sec { padding: 80px 0; }
+
+.bento-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-auto-rows: 200px;
+  gap: 16px;
+
+  @include xl { grid-template-columns: repeat(3, 1fr); }
+  @include md { grid-template-columns: repeat(2, 1fr); }
+  @include sm { grid-template-columns: 1fr; }
+}
+
+.bento {
+  @include card;
+  padding: 24px; display: flex; flex-direction: column;
+  justify-content: flex-end; overflow: hidden; position: relative;
+
+  &.large { grid-column: span 2; }
+  &-icon  { font-size: 2rem; margin-bottom: 8px; }
+  &-stat  { font-family: $font-display; font-size: 2.5rem; color: $gold; line-height: 1; }
+  h4 { font-size: 0.93rem; font-weight: 700; margin-bottom: 4px; }
+  p  { font-size: 0.78rem; color: $text-muted; line-height: 1.5; }
+  a  { color: $blue-2; font-size: 0.78rem; font-weight: 700; text-decoration: none; &:hover { color: $gold; } }
+}
+
+// ── Hero animations ──────────────────────────────
+.hero-float-cards {
+  position: absolute; inset: 0; pointer-events: none; overflow: hidden; z-index: 0;
+}
+
+.hfc {
+  position: absolute; display: flex; align-items: center; gap: 8px;
+  padding: 8px 14px; border-radius: $radius-full;
+  background: $card-hover; border: 1px solid $border;
+  backdrop-filter: blur(4px);
+  color: $text-muted; font-size: 0.7rem; font-weight: 600;
+  white-space: nowrap; animation: floatCard 18s ease-in-out infinite;
+  animation-delay: calc(var(--i) * -2.2s);
+
+  .hfc-icon { font-size: 0.95rem; }
+}
+
+.hfc:nth-child(1) { top: 18%; left: 8%; animation-duration: 20s; }
+.hfc:nth-child(2) { top: 35%; left: 12%; animation-duration: 22s; }
+.hfc:nth-child(3) { top: 60%; left: 6%; animation-duration: 19s; }
+.hfc:nth-child(4) { top: 75%; left: 18%; animation-duration: 23s; }
+.hfc:nth-child(5) { top: 12%; right: 6%; animation-duration: 21s; }
+.hfc:nth-child(6) { top: 55%; right: 8%; animation-duration: 18s; }
+.hfc:nth-child(7) { top: 80%; right: 14%; animation-duration: 24s; }
+.hfc:nth-child(8) { top: 28%; right: 5%; animation-duration: 20s; }
+
+// Rotate word
+.hero-rotate-wrap { position: relative; height: 1.1em; overflow: hidden; }
+
+.hero-rotate-word {
+  position: absolute; left: 0; top: 0; width: 100%;
+  @include gold-text;
+  opacity: 0; transform: translateY(36px);
+  transition: opacity 0.5s ease, transform 0.5s ease; display: block;
+
+  &.active { opacity: 1; transform: translateY(0); }
+  &.prev   { opacity: 0; transform: translateY(-36px); }
+}
+
+// Typewriter
+.hero-typewriter {
+  display: flex; align-items: center; gap: 8px;
+  margin: 0 0 20px; font-family: $font-mono;
+  font-size: 0.78rem; color: $text-muted;
+}
+
+.tw-prefix { color: $text-muted; }
+.tw-text   { color: $gold-2; font-weight: 700; }
+.tw-cursor { color: $gold; animation: blink 0.7s step-end infinite; }
+
+// Trust strip
+.hero-trust-strip {
+  display: flex; align-items: center; gap: 12px; flex-wrap: wrap;
+  margin-top: 20px; padding-top: 16px; border-top: 1px solid $border;
+}
+
+.hts-item {
+  display: flex; align-items: center; gap: 5px;
+  font-size: 0.72rem; color: $text-muted; font-weight: 600;
+  span { font-size: 0.88rem; }
+}
+
+.hts-sep { width: 1px; height: 12px; background: $border; }
+
+// Hero card label
+.hero-card-label {
+  font-size: $fs-xs; color: $gold; font-weight: 800;
+  letter-spacing: 0.14em; text-transform: uppercase;
+  font-family: $font-mono; margin-bottom: 12px;
+}
+
+// ── About page ───────────────────────────────────
+.history-block {
+  display: flex; gap: 28px; align-items: flex-start;
+  padding: 28px; border-radius: $radius-lg;
+  background: $card-hover; border: 1px solid $border;
+
+  @include md { flex-direction: column; }
+}
+
+.history-year-badge {
+  @include gold-gradient;
+  color: $navy; padding: 14px 18px; border-radius: $radius-md;
+  font-family: $font-display; text-align: center; flex-shrink: 0;
+
+  span  { display: block; font-size: 1.9rem; line-height: 1; }
+  small { font-family: $font-mono; font-size: $fs-xs; font-weight: 800; letter-spacing: 0.1em; text-transform: uppercase; }
+}
+
+.vm-card { border-left: 3px solid $gold !important; }
+
+// ── Nisp banner ──────────────────────────────────
+.nisp-banner {
+  display: flex; align-items: center; justify-content: space-between;
+  gap: 24px; flex-wrap: wrap;
+  padding: 30px 34px; border-radius: $radius-xl;
+  background: $gold-light; border: 1px solid $border-gold;
+
+  h3 { font-family: $font-display; font-size: 1.35rem; margin-bottom: 6px; }
+  p  { font-size: 0.87rem; color: $text-muted; margin: 0; }
+}
+
+// ── Placement ────────────────────────────────────
+.placement-about-block {
+  background: $card-hover; border: 1px solid $border;
+  border-radius: $radius-lg; padding: 26px 30px;
+}
+
+.placement-desc { font-size: 0.98rem; color: $text-secondary; line-height: 1.85; margin-bottom: 20px; }
+.placement-activity { display: flex; gap: 10px; align-items: flex-start; margin-bottom: 8px; font-size: 0.83rem; color: $text-muted; line-height: 1.6; }
+.activity-dot { color: $gold; font-size: 0.68rem; flex-shrink: 0; margin-top: 4px; }
+
+// ── Community ────────────────────────────────────
+.community-overview-block {
+  background: $card-hover; border: 1px solid $border;
+  border-radius: $radius-lg; padding: 28px 30px;
+}
+
+.community-intro { font-size: 0.96rem; color: $text-secondary; line-height: 1.85; margin-bottom: 22px; }
+.community-objectives h3,
+.community-justification h3 { font-size: 0.98rem; font-weight: 700; color: $gold-2; margin-bottom: 10px; font-family: $font-ui; }
+
+// ── EOA compact cards ────────────────────────────
+.eoa-card { text-align: center; padding: 18px 14px !important; }
+
+// ── Admin footer link ────────────────────────────
+.admin-footer-link {
+  color: $text-muted; font-size: $fs-xs;
+  text-decoration: none; letter-spacing: 0.06em;
+  transition: $transition-fast; font-family: $font-mono;
+
+  &:hover { color: $gold; }
+}
+
+// ── Skill admission card ─────────────────────────
+.skill-adm-card {
+  padding: 26px; border-radius: $radius-lg;
+  background: $gold-light; border: 1px solid $border-gold;
+}
+
+.skill-adm-header { display: flex; align-items: center; gap: 12px; margin-bottom: 14px; }
+.skill-adm-icon   { font-size: 1.9rem; }
+.skill-adm-header h3 { font-size: 1.02rem; font-weight: 700; }

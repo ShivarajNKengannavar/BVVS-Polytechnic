@@ -1,0 +1,287 @@
+    <nav [class.scrolled]="isScrolled" [class.mob-open-nav]="mobOpen">
+
+      <div class="nav-wrap">
+
+        <!-- Logo -->
+        <a routerLink="/" class="logo-lockup" (click)="closeMob()">
+          <div class="logo-hex">BV</div>
+          <div class="logo-words">
+            <b>B.V.V.S. Polytechnic</b>
+            <small>Autonomous · Est. 1958</small>
+          </div>
+        </a>
+
+        <!-- Desktop Menu — 6 top-level groups -->
+        <ul class="nav-menu">
+
+          <!-- 1. ABOUT -->
+          <li>
+            <span class="nav-link" [class.active]="isAnyRouteActive(['/about','/entrepreneurship'])" (click)="go('about')">
+              About <span class="chev" >▾</span>
+            </span>
+            <div class="drop reg-drop" 
+                >
+              <a class="di" (click)="go('about')"><span>🏛</span><div><b>About BVVS</b><small>History, Vision & Mission</small></div></a>
+              <a class="di" href="https://bvvspolytech.com/pdf/Roll%20of%20Principals.pdf" target="_blank"><span>👤</span><div><b>Roles of Principal</b><small>Administrative structure</small></div></a>
+              <a class="di" href="https://bvvspolytech.com/pdf/aboutus/B.V.V.S.Polytechnic%20-Regulations-02-11-2019-SSH.pdf" target="_blank"><span>📄</span><div><b>BVVS Regulations</b><small>Academic policies</small></div></a>
+              <a class="di" href="https://bvvspolytech.com/pdf/Mandatory%20Disclosures_16_07_2024.pdf" target="_blank"><span>📋</span><div><b>Mandatory Disclosure</b><small>AICTE transparency</small></div></a>
+              <a class="di" (click)="go('entrepreneurship')"><span>🚀</span><div><b>Entrepreneurship</b><small>IIC, Startup, IPR cells</small></div></a>
+              <a class="di" href="http://nisp.bvvspolytech.com/" target="_blank"><span>💡</span><div><b>NISP Portal</b><small>Innovation policy</small></div></a>
+            </div>
+          </li>
+
+          <!-- 2. ACADEMICS -->
+          <li>
+            <span class="nav-link" [class.active]="isRouteActive('/academics')" (click)="go('academics')">
+              Academics <span class="chev" >▾</span>
+            </span>
+            <div class="drop mega-drop" 
+                >
+              <div class="mega-col">
+                <div class="mc-head">Diploma Programmes</div>
+                <a class="mi" (click)="go('academics/civil')"><span>🏗</span> Civil Engineering</a>
+                <a class="mi" (click)="go('academics/electrical')"><span>⚡</span> Electrical &amp; Electronics</a>
+                <a class="mi" (click)="go('academics/mechanical')"><span>⚙</span> Mechanical Engg.</a>
+                <a class="mi" (click)="go('academics/automobile')"><span>🚗</span> Automobile Engg.</a>
+                <a class="mi" (click)="go('academics/electronics')"><span>📡</span> Electronics &amp; Comm.</a>
+                <a class="mi" (click)="go('academics/cse')"><span>💻</span> Computer Science</a>
+                <a class="mi" (click)="go('academics/instrumentation')"><span>🎛</span> Instrumentation</a>
+                <a class="mi" (click)="go('academics/ise')"><span>💡</span> Information Science</a>
+                <a class="mi" (click)="go('academics/commercial')"><span>📊</span> Commercial Practice</a>
+                <a class="mi more" (click)="go('academics')">View All Departments →</a>
+              </div>
+              <div class="mega-col">
+                <div class="mc-head">Admission</div>
+                <a class="mi" (click)="go('admission')"><span>✨</span> Apply for Admission</a>
+                <a class="mi" href="https://bvvspolytech.com/pdf/staff%20details/office%2011-01-2020-converted%20(1).pdf" target="_blank"><span>👥</span> Office Staff Details</a>
+                <div class="mc-head" style="margin-top:14px">Community</div>
+                <a class="mi" (click)="go('community')"><span>🎓</span> Community College</a>
+                <a class="mi" (click)="go('community')"><span>🌱</span> CDTP Scheme</a>
+                <a class="mi" href="https://bvvspolytech.com/pdf/NEW%2024TH%20SP%20DOCUMENT%202019-20(2).pdf" target="_blank"><span>📘</span> CCTek</a>
+                <a class="mi" href="https://bvvspolytech.com/pdf/Bvvsrefundpolicy.pdf" target="_blank"><span>🇨🇦</span> CIICP</a>
+              </div>
+            </div>
+          </li>
+
+          <!-- 3. CAMPUS -->
+          <li>
+            <span class="nav-link" [class.active]="isAnyRouteActive(['/student-life','/placement','/gallery'])" (click)="go('student-life')">
+              Campus <span class="chev" >▾</span>
+            </span>
+            <div class="drop reg-drop" 
+                >
+              <a class="di" (click)="go('placement')"><span>💼</span><div><b>Placement Cell</b><small>JSW, L&amp;T, BEL &amp; more</small></div></a>
+              <a class="di" (click)="go('student-life')"><span>🤝</span><div><b>Committees</b><small>ICC, Anti-Ragging, Alumni</small></div></a>
+              <a class="di" (click)="go('community')"><span>🔗</span><div><b>Alumni Registration</b><small>Stay connected</small></div></a>
+              <a class="di" href="https://bvvspolytech.com/pdf/scholarship.pdf" target="_blank"><span>🎓</span><div><b>Scholarships</b><small>Govt, AICTE Pragati</small></div></a>
+              <a class="di" href="https://bvvspolytech.com/pdf/calander%20of%20events%202025-2026.pdf" target="_blank"><span>📅</span><div><b>Calendar of Events</b><small>2025–26</small></div></a>
+              <a class="di" (click)="go('gallery')"><span>🖼</span><div><b>Gallery</b><small>Events &amp; campus life</small></div></a>
+            </div>
+          </li>
+          <!-- 4. EXAMINATIONS -->
+          <li>
+            <span class="nav-link" [class.active]="isAnyRouteActive(['/examinations','/circulars'])" (click)="go('examinations')">
+              Exams <span class="chev" >▾</span>
+            </span>
+            <div class="drop mega-drop" 
+                >
+              <div class="mega-col">
+                <div class="mc-head">Results</div>
+                <a class="di result-link" href="https://resultstest.digitalmis.com/" target="_blank">
+                  <span>📊</span><div><b>C-21 / C-25 Results</b><small>Latest batch</small></div><span class="live-badge">Live</span>
+                </a>
+                <a class="di result-link" href="https://results.bvvspolytech.com/" target="_blank">
+                  <span>📊</span><div><b>C-15 / C-19 Results</b><small>Previous batch</small></div>
+                </a>
+                <a class="di" href="https://bvvspolytech.com/CommunityResult.aspx" target="_blank">
+                  <span>📊</span><div><b>Community Results</b><small>Community college</small></div>
+                </a>
+                <div class="mc-head" style="margin-top:14px">Circulars</div>
+                <a class="mi" (click)="go('circulars')"><span>📢</span> All Notices &amp; Circulars</a>
+                <a class="mi" href="https://bvvspolytech.com/pdf/exam_circular_may_25.pdf" target="_blank"><span>📋</span> Exam Circular May 2025</a>
+                <a class="mi" href="https://bvvspolytech.com/downloads/exampostpone.pdf" target="_blank"><span>⏸</span> Postponement Notice</a>
+              </div>
+              <div class="mega-col">
+                <div class="mc-head">Certificates &amp; Rules</div>
+                <a class="mi" (click)="go('examinations')"><span>🏛</span> Examination Cell</a>
+                <a class="mi" href="https://bvvspolytech.com/exam.aspx" target="_blank"><span>📄</span> Certificate / Duplicates</a>
+                <a class="mi" href="https://bvvspolytech.com/exam.aspx" target="_blank"><span>✏️</span> Correction of Marks Card</a>
+                <a class="mi" href="https://bvvspolytech.com/exam.aspx" target="_blank"><span>💰</span> Exam Fee Structure</a>
+                <a class="mi" href="https://bvvspolytech.com/pdf/112169.pdf" target="_blank"><span>📋</span> C-19 Rules</a>
+                <a class="mi" href="https://bvvspolytech.com/pdf/exam%20rules%20and%20guidelines-C-21-REVISED.docx" target="_blank"><span>📋</span> C-21 Rules</a>
+                <a class="mi" href="https://bvvspolytech.com/pdf/Exam%20Notification%20Addition.pdf" target="_blank"><span>🧘</span> Yoga Practical</a>
+              </div>
+            </div>
+          </li>
+
+          <!-- 5. GOVERNANCE -->
+          <li>
+            <span class="nav-link" [class.active]="isAnyRouteActive(['/administration','/accreditation','/downloads'])" (click)="go('administration')">
+              Governance <span class="chev" >▾</span>
+            </span>
+            <div class="drop mega-drop" 
+                >
+              <div class="mega-col">
+                <div class="mc-head">Accreditation</div>
+                <a class="di" (click)="go('accreditation')"><span>🏆</span><div><b>Accreditation Status</b><small>NBA certificates</small></div></a>
+                <a class="di" (click)="go('administration')"><span>📑</span><div><b>AICTE EOA Letters</b><small>20 years of approval</small></div></a>
+                <a class="di" href="https://bvvspolytech.com/pdf/Mandatory%20Disclosures_16_07_2024.pdf" target="_blank"><span>📋</span><div><b>Mandatory Disclosure</b><small>AICTE transparency</small></div></a>
+                <div class="mc-head" style="margin-top:14px">Finance</div>
+                <a class="mi" (click)="go('downloads')"><span>📊</span> Audit Reports</a>
+                <a class="mi" (click)="go('downloads')"><span>💰</span> Budget Documents</a>
+                <a class="mi" href="https://bvvspolytech.com/pdf/RTI%202023-24.pdf" target="_blank"><span>📁</span> RTI 2023–24</a>
+              </div>
+              <div class="mega-col">
+                <div class="mc-head">Committees</div>
+                <a class="mi" (click)="go('student-life')"><span>🤝</span> Alumni EC</a>
+                <a class="mi" href="https://bvvspolytech.com/downloads/21032023/Sexual%20Harassment%20Committee.docx" target="_blank"><span>⚖</span> ICC Members</a>
+                <a class="mi" href="https://bvvspolytech.com/downloads/21032023/SC%20ST%20Committee.docx" target="_blank"><span>🏷</span> SC/ST Committee</a>
+                <a class="mi" href="https://bvvspolytech.com/downloads/21032023/Antiraging%20Committee.pdf" target="_blank"><span>🛡</span> Anti-Ragging</a>
+                <a class="mi" href="https://bvvspolytech.com/downloads/21032023/Award%20Committee.docx" target="_blank"><span>🏆</span> Award Committee</a>
+                <a class="mi" href="https://bvvspolytech.com/downloads/21032023/OMBUDSMAN%20Committee.docx" target="_blank"><span>📣</span> Grievance Cell</a>
+                <div class="mc-head" style="margin-top:14px">Downloads</div>
+                <a class="mi" (click)="go('downloads')"><span>⬇</span> All Downloads</a>
+              </div>
+            </div>
+          </li>
+
+          <!-- 6. QUICK LINKS (Admission CTA) -->
+          <li><span class="nav-link" [class.active]="isRouteActive('/admission')" (click)="go('admission')">Admission</span></li>
+
+        </ul>
+
+        <!-- Right side actions -->
+        <div class="nav-right">
+          <div *ngIf="isLoggedIn" class="nav-profile-chip" title="Current logged in user">
+            <span class="npc-name">{{ username }}</span>
+            <span class="npc-role">{{ roleLabel }}</span>
+          </div>
+          <a *ngIf="!isLoggedIn" (click)="go('login')" class="nav-login-btn">Login</a>
+          <a *ngIf="isLoggedIn && userRole === 'admin'" (click)="go('admin/dashboard')" class="nav-login-btn">Dashboard</a>
+          <a *ngIf="isLoggedIn" (click)="logout()" class="nav-logout-btn">Logout</a>
+          <a href="https://resultstest.digitalmis.com/" target="_blank" class="nav-results-btn">Results ↗</a>
+          <a (click)="go('admission')" class="nav-cta">Apply Now ✦</a>
+          <button class="nav-ham" (click)="toggleMob()" [class.active]="mobOpen" aria-label="Menu">
+            <span></span><span></span><span></span>
+          </button>
+        </div>
+
+      </div>
+    </nav>
+
+    <!-- ── Mobile Drawer ─────────────────────────────────────── -->
+    <div class="mob-drawer" [class.open]="mobOpen">
+      <div class="mob-drawer-header">
+        <div class="logo-lockup" style="cursor:pointer" (click)="go('');closeMob()">
+          <div class="logo-hex" style="width:32px;height:32px;font-size:0.8rem">BV</div>
+          <div class="logo-words"><b>B.V.V.S. Polytechnic</b><small>Autonomous · Est. 1958</small></div>
+        </div>
+        <button class="mob-close-btn" (click)="closeMob()">✕</button>
+      </div>
+
+      <!-- Quick actions -->
+      <div class="mob-quick">
+        <div *ngIf="isLoggedIn" class="mob-profile-chip">
+          <span class="mpc-name">{{ username }}</span>
+          <span class="mpc-role">{{ roleLabel }}</span>
+        </div>
+        <a *ngIf="!isLoggedIn" (click)="go('login');closeMob()" class="mob-quick-btn">🔐 Login</a>
+        <a *ngIf="isLoggedIn && userRole === 'admin'" (click)="go('admin/dashboard');closeMob()" class="mob-quick-btn">🧭 Dashboard</a>
+        <a *ngIf="isLoggedIn" (click)="logout()" class="mob-quick-btn">🚪 Logout</a>
+        <a href="https://resultstest.digitalmis.com/" target="_blank" class="mob-quick-btn" (click)="closeMob()">📊 Results</a>
+        <a (click)="go('admission');closeMob()" class="mob-quick-btn gold">✨ Apply Now</a>
+      </div>
+
+      <!-- Accordion groups -->
+      <div class="mob-accordion">
+
+        <div class="mob-group">
+          <div class="mob-group-header" [class.active]="isAnyRouteActive(['/about','/entrepreneurship'])" (click)="toggleMobGroup('about')">
+            <span>About</span>
+            <span class="mob-chev" [class.r]="mobGroup==='about'">▾</span>
+          </div>
+          <div class="mob-group-body" [class.open]="mobGroup==='about'">
+            <a [class.active-link]="isRouteActive('/about')" (click)="go('about');closeMob()">🏛 About BVVS Polytechnic</a>
+            <a [class.active-link]="isRouteActive('/entrepreneurship')" (click)="go('entrepreneurship');closeMob()">🚀 Entrepreneurship</a>
+            <a href="https://bvvspolytech.com/pdf/Mandatory%20Disclosures_16_07_2024.pdf" target="_blank" (click)="closeMob()">📋 Mandatory Disclosure</a>
+            <a href="http://nisp.bvvspolytech.com/" target="_blank" (click)="closeMob()">💡 NISP Portal</a>
+          </div>
+        </div>
+
+        <div class="mob-group">
+          <div class="mob-group-header" [class.active]="isRouteActive('/academics')" (click)="toggleMobGroup('acad')">
+            <span>Academics / Departments</span>
+            <span class="mob-chev" [class.r]="mobGroup==='acad'">▾</span>
+          </div>
+          <div class="mob-group-body" [class.open]="mobGroup==='acad'">
+            <a (click)="go('academics/civil');closeMob()">🏗 Civil Engineering</a>
+            <a (click)="go('academics/electrical');closeMob()">⚡ Electrical &amp; Electronics</a>
+            <a (click)="go('academics/mechanical');closeMob()">⚙ Mechanical</a>
+            <a (click)="go('academics/automobile');closeMob()">🚗 Automobile</a>
+            <a (click)="go('academics/electronics');closeMob()">📡 Electronics &amp; Comm.</a>
+            <a (click)="go('academics/cse');closeMob()">💻 Computer Science</a>
+            <a (click)="go('academics/instrumentation');closeMob()">🎛 Instrumentation</a>
+            <a (click)="go('academics/ise');closeMob()">💡 Information Science</a>
+            <a (click)="go('academics/commercial');closeMob()">📊 Commercial Practice</a>
+            <a [class.active-link]="isRouteActive('/academics')" (click)="go('academics');closeMob()" class="mob-more">View All Departments →</a>
+          </div>
+        </div>
+
+        <div class="mob-group">
+          <div class="mob-group-header" [class.active]="isAnyRouteActive(['/student-life','/placement','/gallery'])" (click)="toggleMobGroup('campus')">
+            <span>Campus Life</span>
+            <span class="mob-chev" [class.r]="mobGroup==='campus'">▾</span>
+          </div>
+          <div class="mob-group-body" [class.open]="mobGroup==='campus'">
+            <a [class.active-link]="isRouteActive('/placement')" (click)="go('placement');closeMob()">💼 Placement Cell</a>
+            <a [class.active-link]="isRouteActive('/gallery')" (click)="go('gallery');closeMob()">🖼 Gallery</a>
+            <a [class.active-link]="isRouteActive('/student-life')" (click)="go('student-life');closeMob()">🤝 Committees</a>
+            <a href="https://bvvspolytech.com/pdf/scholarship.pdf" target="_blank" (click)="closeMob()">🎓 Scholarships</a>
+            <a (click)="go('community');closeMob()">🔗 Alumni Registration</a>
+          </div>
+        </div>
+
+        <div class="mob-group">
+          <div class="mob-group-header" [class.active]="isAnyRouteActive(['/examinations','/circulars'])" (click)="toggleMobGroup('exam')">
+            <span>Examinations</span>
+            <span class="mob-chev" [class.r]="mobGroup==='exam'">▾</span>
+          </div>
+          <div class="mob-group-body" [class.open]="mobGroup==='exam'">
+            <a href="https://resultstest.digitalmis.com/" target="_blank" (click)="closeMob()">📊 C-21/C-25 Results</a>
+            <a href="https://results.bvvspolytech.com/" target="_blank" (click)="closeMob()">📊 C-15/C-19 Results</a>
+            <a [class.active-link]="isRouteActive('/examinations')" (click)="go('examinations');closeMob()">🏛 Exam Portal</a>
+            <a [class.active-link]="isRouteActive('/circulars')" (click)="go('circulars');closeMob()">📢 Circulars &amp; Notices</a>
+          </div>
+        </div>
+
+        <div class="mob-group">
+          <div class="mob-group-header" [class.active]="isAnyRouteActive(['/administration','/accreditation','/downloads'])" (click)="toggleMobGroup('gov')">
+            <span>Governance</span>
+            <span class="mob-chev" [class.r]="mobGroup==='gov'">▾</span>
+          </div>
+          <div class="mob-group-body" [class.open]="mobGroup==='gov'">
+            <a [class.active-link]="isRouteActive('/accreditation')" (click)="go('accreditation');closeMob()">🏆 Accreditation Status</a>
+            <a [class.active-link]="isRouteActive('/administration')" (click)="go('administration');closeMob()">📑 AICTE EOA Letters</a>
+            <a [class.active-link]="isRouteActive('/downloads')" (click)="go('downloads');closeMob()">📊 Finance &amp; Audit</a>
+            <a [class.active-link]="isRouteActive('/downloads')" (click)="go('downloads');closeMob()">⬇ All Downloads</a>
+          </div>
+        </div>
+
+        <div class="mob-group">
+          <div class="mob-group-header" (click)="toggleMobGroup('community')">
+            <span>Community &amp; More</span>
+            <span class="mob-chev" [class.r]="mobGroup==='community'">▾</span>
+          </div>
+          <div class="mob-group-body" [class.open]="mobGroup==='community'">
+            <a (click)="go('community');closeMob()">🎓 Community College</a>
+            <a (click)="go('entrepreneurship');closeMob()">🚀 Entrepreneurship</a>
+            <a href="https://bvvspolytech.com/alumnireg.htm" target="_blank" (click)="closeMob()">🔗 Alumni Registration</a>
+            <a href="https://bvvspolytech.com/pdf/RTI%202023-24.pdf" target="_blank" (click)="closeMob()">📁 RTI 2023–24</a>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Mobile overlay backdrop -->
+    <div class="mob-backdrop" [class.show]="mobOpen" (click)="closeMob()"></div>

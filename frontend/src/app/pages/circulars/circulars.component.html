@@ -1,0 +1,35 @@
+    <div class="sub-hero">
+      <div class="sub-hero-inner">
+        <a routerLink="/" class="back-btn">← Back to Home</a>
+        <div class="s-tag">Official Notices</div>
+        <h1 class="sub-page-title">Circulars &amp; Notices</h1>
+        <p class="sub-page-desc">All official examination circulars, admission notices, exam postponements and important announcements from BVVS Polytechnic.</p>
+      </div>
+    </div>
+    <div class="sub-content">
+
+      <div class="sub-section">
+        <div class="sub-sec-head"><h2 class="sub-sec-title">Recent Exam Circulars (2024–25)</h2></div>
+        <div class="sub-grid">
+          <div class="info-card" *ngFor="let c of recentCirculars">
+            <span class="info-icon">{{ c.icon }}</span>
+            <h4>{{ c.title }}</h4>
+            <p>{{ c.desc }}</p>
+            <a [href]="c.url" target="_blank" class="info-link">{{ c.label }} ↗</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="sub-section">
+        <div class="sub-sec-head"><h2 class="sub-sec-title">Previous Notices</h2></div>
+        <div class="sub-grid">
+          <div class="info-card" *ngFor="let n of previousNotices">
+            <span class="info-icon">{{ n.icon }}</span>
+            <h4>{{ n.title }}</h4>
+            <p>{{ n.desc }}</p>
+            <a [href]="n.url" target="_blank" class="info-link">{{ n.label }} ↗</a>
+          </div>
+        </div>
+      </div>
+
+    </div>

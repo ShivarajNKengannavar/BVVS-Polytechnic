@@ -1,0 +1,43 @@
+    <div class="sub-hero">
+      <div class="sub-hero-inner">
+        <a routerLink="/" class="back-btn">← Back to Home</a>
+        <div class="s-tag">Quality Assurance</div>
+        <h1 class="sub-page-title">Accreditation Status</h1>
+        <p class="sub-page-desc">NBA accreditation certificates and AICTE EOA letters validating the quality of diploma programmes at BVVS Polytechnic, Bagalkot.</p>
+      </div>
+    </div>
+    <div class="sub-content">
+
+      <!-- NBA Status -->
+      <div class="sub-section">
+        <div class="sub-sec-head"><h2 class="sub-sec-title">NBA Accreditation</h2></div>
+        <div class="accred-timeline">
+          <div class="accred-item" *ngFor="let a of nbaItems; let i = index">
+            <div class="accred-timeline-dot" [class.active]="i === 0">
+              <span>{{ i === 0 ? '✓' : '●' }}</span>
+            </div>
+            <div class="accred-item-card" [class.current]="i === 0">
+              <div class="accred-item-badge" *ngIf="i === 0">Current</div>
+              <h3>{{ a.period }}</h3>
+              <p>{{ a.description }}</p>
+              <a [href]="a.docUrl" target="_blank" class="info-link">{{ a.label }} ↗</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- AICTE EOA Summary -->
+      <div class="sub-section">
+        <div class="sub-sec-head">
+          <h2 class="sub-sec-title">AICTE EOA Letters</h2>
+          <span class="sub-sec-meta">Extension of Approval — 20 years of continuous approval</span>
+        </div>
+        <div class="sub-grid g4">
+          <a *ngFor="let e of eoaLetters" [href]="e.url" target="_blank" class="eoa-pill">
+            <span class="eoa-year">{{ e.year }}</span>
+            <span class="eoa-dl">↗</span>
+          </a>
+        </div>
+      </div>
+
+    </div>
