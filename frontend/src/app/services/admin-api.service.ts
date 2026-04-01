@@ -2,8 +2,11 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { AdminAuthService } from './admin-auth.service';
+import { environment } from '../../environments/environment';
 
-const API = 'http://localhost:3001/api';
+const API = environment.apiUrl.endsWith('/api')
+  ? environment.apiUrl
+  : `${environment.apiUrl}/api`;
 
 @Injectable({ providedIn: 'root' })
 export class AdminApiService {

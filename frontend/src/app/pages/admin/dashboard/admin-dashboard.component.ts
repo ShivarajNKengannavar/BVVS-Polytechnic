@@ -4,6 +4,7 @@ import { RouterLink } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { AdminAuthService } from '../../../services/admin-auth.service';
 import { AdminApiService } from '../../../services/admin-api.service';
+import { environment } from '../../../../environments/environment';
 
 @Component({
   selector: 'app-admin-dashboard',
@@ -13,6 +14,10 @@ import { AdminApiService } from '../../../services/admin-api.service';
   styleUrls: ['./admin-dashboard.component.scss']
 })
 export class AdminDashboardComponent implements OnInit {
+  private readonly backendBaseUrl = environment.apiUrl.endsWith('/api')
+    ? environment.apiUrl.replace(/\/api$/, '')
+    : environment.apiUrl;
+
   activeTab = 'dashboard';
   adminUser = '';
 
@@ -333,7 +338,7 @@ export class AdminDashboardComponent implements OnInit {
 
   /* ── Helpers ────────────────────────── */
   getFullUrl(url: string): string {
-    return url.startsWith('http') ? url : `http://localhost:3001${url}`;
+    return url.startsWith('http') ? url : `${this.backendBaseUrl}${url}`;
   }
 
   copyUrl(url: string): void {

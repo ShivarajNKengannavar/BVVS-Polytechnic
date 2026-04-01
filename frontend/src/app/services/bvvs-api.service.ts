@@ -1,8 +1,11 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { environment } from '../../environments/environment';
 
-const API = 'http://localhost:3001/api';
+const API = environment.apiUrl.endsWith('/api')
+  ? environment.apiUrl
+  : `${environment.apiUrl}/api`;
 
 @Injectable({ providedIn: 'root' })
 export class BvvsApiService {
