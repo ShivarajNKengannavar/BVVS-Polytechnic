@@ -33,16 +33,6 @@ VALUES (
   true
 ) ON CONFLICT (username) DO NOTHING;
 
--- Insert additional staff members with different roles
-INSERT INTO users (username, email, password_hash, role, full_name, is_active)
-VALUES
-  ('faculty1', 'faculty1@bvvs.edu.in', '$2a$10$3EADFyUjc.HcaGmZO.08Pex7CSrICY.Iuu6DytyPTp9VmaHqD87pG', 'faculty', 'Dr. John Doe', true),
-  ('student1', 'student1@bvvs.edu.in', '$2a$10$3EADFyUjc.HcaGmZO.08Pex7CSrICY.Iuu6DytyPTp9VmaHqD87pG', 'student', 'Student User', true),
-  ('librarian1', 'librarian1@bvvs.edu.in', '$2a$10$3EADFyUjc.HcaGmZO.08Pex7CSrICY.Iuu6DytyPTp9VmaHqD87pG', 'librarian', 'Library Staff', true),
-  ('staff1', 'staff1@bvvs.edu.in', '$2a$10$3EADFyUjc.HcaGmZO.08Pex7CSrICY.Iuu6DytyPTp9VmaHqD87pG', 'staff', 'Staff Member', true),
-  ('moderator1', 'moderator1@bvvs.edu.in', '$2a$10$3EADFyUjc.HcaGmZO.08Pex7CSrICY.Iuu6DytyPTp9VmaHqD87pG', 'moderator', 'Content Moderator', true)
-ON CONFLICT (username) DO NOTHING;
-
 -- Add admin user to admin_users table
 INSERT INTO admin_users (user_id, department, permissions)
 SELECT id, 'Administration', '{"manage_users": true, "manage_content": true, "manage_settings": true}'
