@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import { environment } from '../../environments/environment';
 
 const API = environment.apiUrl;
+const API_BASE = API.endsWith('/api') ? API : `${API}/api`;
 
 interface LoginResponse {
   token: string;
@@ -31,7 +32,7 @@ export class AdminAuthService {
   }
 
   login(username: string, password: string): Observable<LoginResponse> {
-    return this.http.post<LoginResponse>(`http://localhost:3001/api/auth/login`, { username, password }).pipe(
+    return this.http.post<LoginResponse>(`${API_BASE}/auth/login`, { username, password }).pipe(
       tap((res: LoginResponse) => {
         localStorage.setItem('bvvs_admin_token', res.token);
         localStorage.setItem('bvvs_admin_user', res.username);
@@ -96,7 +97,7 @@ export class AdminAuthService {
   }
 
   verify(): Observable<any> {
-    return this.http.get(`${API}/auth/verify`, {
+    return this.http.get(`${API_BASE}/auth/verify`, {
       headers: { Authorization: `Bearer ${this.getToken()}` }
     });
   }
