@@ -284,7 +284,11 @@ nav {
   width: min(340px,92vw); background: #ffffff; z-index: 1100;
   overflow-y: auto; transition: right .32s cubic-bezier(.4,0,.2,1);
   box-shadow: -16px 0 50px rgba(15,23,42,0.22);
-  &.open { right: 0; }
+  pointer-events: none;
+  &.open {
+    right: 0;
+    pointer-events: auto;
+  }
 }
 
 .mob-drawer-header {
@@ -396,7 +400,11 @@ nav {
   background: rgba(0,0,0,0.6); z-index:1050;
   backdrop-filter: blur(2px);
   opacity:0; transition:opacity .3s;
-  &.show { opacity:1; }
+  pointer-events: none;
+  &.show {
+    opacity:1;
+    pointer-events: auto;
+  }
 }
 
 /* ══════════════════════════════════════════════════════

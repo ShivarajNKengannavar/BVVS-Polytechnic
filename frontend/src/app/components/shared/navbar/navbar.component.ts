@@ -14,6 +14,7 @@ import { AdminAuthService } from '../../../services/admin-auth.service';
 export class NavbarComponent {
   mobOpen   = false;
   mobGroup: string | null = null;
+  isMobileViewport = false;
   isScrolled = false;
   isLoggedIn = false;
   userRole = 'user';
@@ -24,6 +25,7 @@ export class NavbarComponent {
   constructor(private router: Router, private auth: AdminAuthService) {}
 
   ngOnInit(): void {
+    this.updateViewportState();
     this.syncUserSnapshot();
     this.currentUrl = this.router.url || '/';
 
@@ -59,6 +61,9 @@ export class NavbarComponent {
   @HostListener('window:scroll')
   onScroll(): void { this.isScrolled = window.scrollY > 60; }
 
+  @HostListener('window:resize')
+  onResize(): void { this.updateViewportState(); }
+
   go(path: string): void {
     this.router.navigate([path.startsWith('/') ? path : '/' + path]);
     this.closeMob();
@@ -80,6 +85,11 @@ export class NavbarComponent {
   }
 
   toggleMob(): void {
+    if (!this.isMobileViewport) {
+      this.closeMob();
+      return;
+    }
+
     this.mobOpen = !this.mobOpen;
     document.body.style.overflow = this.mobOpen ? 'hidden' : '';
   }
@@ -115,5 +125,14 @@ export class NavbarComponent {
     const clean = path.split('?')[0].split('#')[0].trim();
     const withLeadingSlash = clean.startsWith('/') ? clean : `/${clean}`;
     return withLeadingSlash === '/' ? withLeadingSlash : withLeadingSlash.replace(/\/+$/, '');
+  }
+
+  private updateViewportState(): void {
+    this.isMobileViewport = window.matchMedia('(max-width: 900px)').matches;
+
+    // Prevent stale mobile drawer state when switching to desktop viewport/device mode.
+    if (!this.isMobileViewport && this.mobOpen) {
+      this.closeMob();
+    }
   }
 }
