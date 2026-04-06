@@ -2,6 +2,29 @@
 /* Component-specific overrides: */
 .hero { min-height: 100vh; }
 
+.bento-sec {
+	.wrap > .reveal {
+		margin-bottom: 56px !important;
+	}
+
+	.bento-grid {
+		gap: 20px;
+	}
+
+	.bento {
+		padding: 30px;
+	}
+
+	.bento h4 {
+		margin-bottom: 10px;
+	}
+
+	.bento p {
+		line-height: 1.75;
+		margin-bottom: 18px;
+	}
+}
+
 @media (max-width: 1100px) {
 	.hero-content {
 		padding: 70px 28px;
@@ -60,5 +83,23 @@
 
 	.notice-list a {
 		font-size: 0.78rem;
+	}
+
+	.bento-sec {
+		.wrap > .reveal {
+			margin-bottom: 34px !important;
+		}
+
+		.bento-grid {
+			gap: 14px;
+		}
+
+		.bento {
+			padding: 22px;
+		}
+
+		.bento-stat {
+			font-size: 2.35rem;
+		}
 	}
 }
