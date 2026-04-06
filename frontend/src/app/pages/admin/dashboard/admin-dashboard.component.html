@@ -1,7 +1,13 @@
 <div class="admin-shell">
 
+  <header class="admin-mobile-topbar">
+    <button class="admin-mobile-menu-btn" (click)="toggleMobileSidebar()" aria-label="Open admin menu">☰</button>
+    <div class="admin-mobile-title">Admin Panel</div>
+    <a href="/" target="_blank" class="admin-mobile-site-link">↗ View Site</a>
+  </header>
+
   <!-- ══ Sidebar ══════════════════════════════════════════ -->
-  <aside class="admin-sidebar">
+  <aside class="admin-sidebar" [class.open]="mobileSidebarOpen">
 
     <div class="admin-sidebar-logo">
       <div class="admin-logo-hex">BV</div>
@@ -9,6 +15,7 @@
         <div class="admin-logo-title">Admin Panel</div>
         <div class="admin-logo-sub">BVVS Polytechnic</div>
       </div>
+      <button class="admin-mobile-close-btn" (click)="closeMobileSidebar()" aria-label="Close admin menu">✕</button>
     </div>
 
     <nav class="admin-nav">
@@ -45,6 +52,8 @@
     </div>
 
   </aside>
+
+  <div class="admin-mobile-backdrop" [class.show]="mobileSidebarOpen" (click)="closeMobileSidebar()"></div>
 
   <!-- ══ Main Content ══════════════════════════════════════ -->
   <main class="admin-main">

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, HostListener, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
 import { FormsModule } from '@angular/forms';
@@ -20,6 +20,7 @@ export class AdminDashboardComponent implements OnInit {
 
   activeTab = 'dashboard';
   adminUser = '';
+  mobileSidebarOpen = false;
 
   stats = { notices: 0, circulars: 0, documents: 0, departments: 9 };
   notices:   any[] = [];
@@ -97,9 +98,25 @@ export class AdminDashboardComponent implements OnInit {
   /* ── Navigation ─────────────────────── */
   setTab(tab: string): void {
     this.activeTab = tab;
+    this.closeMobileSidebar();
     if (tab === 'documents') this.loadDocuments();
     if (tab === 'departments') this.loadDepartments();
     if (tab === 'settings')  this.loadSettings();
+  }
+
+  toggleMobileSidebar(): void {
+    this.mobileSidebarOpen = !this.mobileSidebarOpen;
+  }
+
+  closeMobileSidebar(): void {
+    this.mobileSidebarOpen = false;
+  }
+
+  @HostListener('window:resize')
+  onResize(): void {
+    if (window.innerWidth > 900 && this.mobileSidebarOpen) {
+      this.mobileSidebarOpen = false;
+    }
   }
 
   /* ── Data loaders ───────────────────── */
@@ -345,5 +362,8 @@ export class AdminDashboardComponent implements OnInit {
     navigator.clipboard.writeText(url).then(() => alert('URL copied to clipboard!'));
   }
 
-  logout(): void { this.auth.logout(); }
+  logout(): void {
+    this.closeMobileSidebar();
+    this.auth.logout();
+  }
 }
