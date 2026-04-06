@@ -11,7 +11,7 @@
 
       <!-- Hero image -->
       <div class="dept-hero-img-wrap">
-        <img [src]="dept.image" [alt]="dept.name" onerror="this.onerror=null;this.src='/assets/images/ENTRANCE.png';">
+        <img [src]="resolveImageUrl(dept.image)" [alt]="dept.name" (error)="onImageError($event)">
         <div class="dept-hero-overlay"></div>
         <div class="dept-duration-badge">{{ dept.duration }}</div>
       </div>

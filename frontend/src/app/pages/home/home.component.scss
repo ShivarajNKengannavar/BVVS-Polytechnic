@@ -1,3 +1,64 @@
 /* Home uses global bvvs-design.css and _components.scss */
 /* Component-specific overrides: */
 .hero { min-height: 100vh; }
+
+@media (max-width: 1100px) {
+	.hero-content {
+		padding: 70px 28px;
+		gap: 56px;
+	}
+
+	.s-desc,
+	.hero-desc {
+		max-width: 680px;
+	}
+}
+
+@media (max-width: 768px) {
+	section {
+		padding: 84px 0;
+	}
+
+	.hero {
+		min-height: auto;
+	}
+
+	.hero-content {
+		padding: 58px 22px 40px;
+		gap: 42px;
+	}
+
+	.hero-title {
+		line-height: 1.12;
+		margin-bottom: 12px;
+	}
+
+	.hero-desc {
+		font-size: 1rem;
+		line-height: 1.82;
+		margin-bottom: 28px;
+	}
+
+	.hero-btns {
+		gap: 12px;
+	}
+
+	.hero-btns .btn-glow,
+	.hero-btns .btn-ghost {
+		width: 100%;
+		justify-content: center;
+	}
+
+	.notice-label {
+		padding: 12px 14px;
+		font-size: 0.66rem;
+	}
+
+	.notice-list {
+		padding: 11px 0;
+	}
+
+	.notice-list a {
+		font-size: 0.78rem;
+	}
+}

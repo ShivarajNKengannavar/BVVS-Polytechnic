@@ -414,12 +414,19 @@ nav {
 @media(max-width:1100px) { .mega-drop { min-width:440px; } }
 
 @media(max-width:1100px) {
-  .nav-menu,
+  .nav-wrap { padding: 0 18px; }
   .nav-results-btn,
-  .nav-profile-chip,
+  .nav-profile-chip { display:none; }
+  .nav-right { gap: 8px; }
+}
+
+@media(max-width:900px) {
+  .nav-menu,
   .nav-login-btn,
   .nav-logout-btn,
-  .nav-cta { display:none; }
+  .nav-cta,
+  .nav-results-btn,
+  .nav-profile-chip { display:none; }
   .nav-ham { display:flex; }
   .mob-drawer, .mob-backdrop { display:block; }
   .nav-right { gap: 0; }

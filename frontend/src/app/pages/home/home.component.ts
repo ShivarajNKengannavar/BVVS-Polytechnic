@@ -11,6 +11,7 @@ import { BvvsApiService } from '../../services/bvvs-api.service';
   styleUrls: ['./home.component.scss']
 })
 export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
+  readonly fallbackImage = 'assets/images/ENTRANCE.png';
   stats: any[]              = [];
   notices: any[]            = [];
   departments: any[]        = [];
@@ -244,6 +245,21 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
 
   go(path: string): void {
     this.router.navigate(['/' + path]);
+  }
+
+  resolveImageUrl(url: string | null | undefined): string {
+    if (!url) return this.fallbackImage;
+    const normalized = url.trim();
+    if (!normalized) return this.fallbackImage;
+    return normalized.startsWith('http://') ? `https://${normalized.slice(7)}` : normalized;
+  }
+
+  onImageError(event: Event): void {
+    const img = event.target as HTMLImageElement | null;
+    if (!img) return;
+    if (img.dataset.fallbackApplied === '1') return;
+    img.dataset.fallbackApplied = '1';
+    img.src = this.fallbackImage;
   }
 
 }

@@ -107,8 +107,8 @@
             <div class="about-img-wrap" id="videoTrigger"
                  title="Achievements, Campus & Legacy of B.V.V.S. Polytechnic"
                  (click)="openVideo()">
-              <img src="/assets/images/ENTRANCE.png"
-                   alt="BVVS Campus" onerror="this.style.display='none'">
+                  <img [src]="fallbackImage"
+                    alt="BVVS Campus" (error)="onImageError($event)">
               <div class="about-play-btn">
                 <div class="about-play-ring"></div>
                 <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
@@ -189,7 +189,7 @@
                [attr.data-href]="'/academics/' + d.id"
                (click)="nav('academics/' + d.id)">
             <div class="prog-img">
-              <img [src]="d.image" [alt]="d.name" onerror="this.onerror=null;this.src='/assets/images/ENTRANCE.png';">
+              <img [src]="resolveImageUrl(d.image)" [alt]="d.name" (error)="onImageError($event)">
               <div class="prog-img-ov"></div>
               <div class="prog-badge">{{ d.shortName }}</div>
             </div>
@@ -250,7 +250,7 @@
         <div class="skill-grid reveal">
           <div class="skill-card" *ngFor="let s of skillProgrammes">
             <div class="skill-icon-wrap">
-              <img [src]="s.image" [alt]="s.title" onerror="this.onerror=null;this.src='/assets/images/ENTRANCE.png';">
+              <img [src]="resolveImageUrl(s.image)" [alt]="s.title" (error)="onImageError($event)">
               <div class="skill-icon-overlay"></div>
               <div class="skill-icon">{{ s.icon }}</div>
             </div>

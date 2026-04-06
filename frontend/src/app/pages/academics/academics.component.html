@@ -28,7 +28,7 @@
           <div class="sub-card" *ngFor="let dept of departments"
                [routerLink]="['/academics', dept.id]">
             <div class="sub-card-img">
-              <img [src]="dept.image" [alt]="dept.name" onerror="this.onerror=null;this.src='/assets/images/ENTRANCE.png';">
+              <img [src]="resolveImageUrl(dept.image)" [alt]="dept.name" (error)="onImageError($event)">
               <div class="sub-card-ov"></div>
               <div class="dept-icon-badge">{{ dept.icon }}</div>
             </div>
@@ -59,7 +59,7 @@
         <div class="skill-grid">
           <div class="skill-card" *ngFor="let s of skillProgrammes">
             <div class="skill-icon-wrap">
-              <img [src]="s.image" [alt]="s.title" onerror="this.onerror=null;this.src='/assets/images/ENTRANCE.png';">
+              <img [src]="resolveImageUrl(s.image)" [alt]="s.title" (error)="onImageError($event)">
               <div class="skill-icon-overlay"></div>
               <div class="skill-icon">{{ s.icon }}</div>
             </div>
