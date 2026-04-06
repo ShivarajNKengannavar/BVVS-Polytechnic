@@ -1,6 +1,6 @@
-    <div id="cursor"></div>
-    <div id="cursor-ring"></div>
-    <canvas id="particles"></canvas>
+    <div id="cursor" *ngIf="!isAdminPage"></div>
+    <div id="cursor-ring" *ngIf="!isAdminPage"></div>
+    <canvas id="particles" *ngIf="!isAdminPage"></canvas>
 
     <!-- Ticker - hidden on admin pages -->
     <div class="ticker" *ngIf="!isAdminPage">
