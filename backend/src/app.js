@@ -2,6 +2,7 @@ require('dotenv').config();
 const express = require('express');
 const cors = require('cors');
 const path = require('path');
+const bcrypt = require('bcryptjs');
 
 // Import database pool
 const pool = require('./data/db');
@@ -16,6 +17,13 @@ const administrationRoutes = require('./routes/administration.routes');
 const admissionRoutes = require('./routes/admission.routes');
 const placementRoutes = require('./routes/placement.routes');
 const adminRoutes = require('./routes/admin.routes');
+
+const DEFAULT_ADMIN_USERNAME = process.env.ADMIN_USERNAME || 'admin';
+const DEFAULT_ADMIN_PASSWORD = process.env.ADMIN_PASSWORD || 'password123';
+const DEFAULT_ADMIN_EMAIL = process.env.ADMIN_EMAIL || 'admin@bvvs.edu.in';
+const DEFAULT_ADMIN_FULL_NAME = process.env.ADMIN_FULL_NAME || 'BVVS Administrator';
+const DEFAULT_ADMIN_ROLE = process.env.ADMIN_ROLE || 'admin';
+const DEFAULT_ADMIN_HASH = '$2a$10$3EADFyUjc.HcaGmZO.08Pex7CSrICY.Iuu6DytyPTp9VmaHqD87pG';
 
 function createApp() {
   const app = express();
@@ -74,6 +82,65 @@ function createApp() {
 }
 
 async function initContentTables() {
+  await pool.query(`
+    CREATE TABLE IF NOT EXISTS users (
+      id SERIAL PRIMARY KEY,
+      username VARCHAR(100) UNIQUE NOT NULL,
+      email VARCHAR(255) UNIQUE NOT NULL,
+      password_hash VARCHAR(255) NOT NULL,
+      role VARCHAR(50) DEFAULT 'user',
+      full_name VARCHAR(255),
+      is_active BOOLEAN DEFAULT true,
+      last_login TIMESTAMP,
+      created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+      updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+    )
+  `);
+
+  await pool.query(`
+    CREATE TABLE IF NOT EXISTS admin_users (
+      id SERIAL PRIMARY KEY,
+      user_id INT UNIQUE REFERENCES users(id) ON DELETE CASCADE,
+      department VARCHAR(100),
+      permissions JSONB DEFAULT '{}'::jsonb,
+      created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+    )
+  `);
+
+  await pool.query(
+    `INSERT INTO users (username, email, password_hash, role, full_name, is_active)
+     VALUES ($1, $2, $3, $4, $5, true)
+     ON CONFLICT (username) DO UPDATE SET
+       email = EXCLUDED.email,
+       password_hash = EXCLUDED.password_hash,
+       role = EXCLUDED.role,
+       full_name = EXCLUDED.full_name,
+       is_active = true,
+       updated_at = CURRENT_TIMESTAMP`,
+    [
+      DEFAULT_ADMIN_USERNAME,
+      DEFAULT_ADMIN_EMAIL,
+      DEFAULT_ADMIN_HASH,
+      DEFAULT_ADMIN_ROLE,
+      DEFAULT_ADMIN_FULL_NAME
+    ]
+  );
+
+  await pool.query(
+    `INSERT INTO admin_users (user_id, department, permissions)
+     SELECT id, $2, $3::jsonb
+     FROM users
+     WHERE username = $1
+     ON CONFLICT (user_id) DO UPDATE SET
+       department = EXCLUDED.department,
+       permissions = EXCLUDED.permissions`,
+    [
+      DEFAULT_ADMIN_USERNAME,
+      'Administration',
+      '{"manage_users": true, "manage_content": true, "manage_settings": true}'
+    ]
+  );
+
   await pool.query(`
     CREATE TABLE IF NOT EXISTS home_notices (
       id SERIAL PRIMARY KEY,

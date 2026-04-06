@@ -53,7 +53,7 @@ let adminData = {
 // ── Admin credentials (in production, use DB with hashed passwords) ─
 const ADMIN_CREDENTIALS = {
   username: process.env.ADMIN_USERNAME || 'admin',
-  password: process.env.ADMIN_PASSWORD || 'bvvs@2025'
+  password: process.env.ADMIN_PASSWORD || 'password123'
 };
 
 let departmentsInitialized = false;
